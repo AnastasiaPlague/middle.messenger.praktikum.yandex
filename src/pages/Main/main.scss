@@ -1,0 +1,40 @@
+.main {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.main__container {
+  --container-max: 600px;
+}
+
+.login {
+  &-title {
+    margin: 0;
+    text-align: center;
+  }
+
+  &-card {
+    padding: var(--size-7);
+    border: 2px solid var(--stone-7);
+    border-radius: 6px;
+  }
+
+  &-form {
+    margin-top: var(--size-8);
+  }
+
+  &-form {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--size-6);
+  }
+}
+
+@media (prefers-color-scheme: "light") {
+  .login {
+    &-card {
+      border-color: var(--stone-4);
+    }
+  }
+}

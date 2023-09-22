@@ -1,0 +1,11 @@
+.button {
+  background-color: var(--purple-10);
+  border-radius: 4px;
+  border: none;
+  padding: var(--size-2) var(--size-3);
+
+  @media (prefers-color-scheme: "light") {
+    color: var(--stone-2);
+    background-color: var(--purple-5);
+  }
+}

@@ -1,0 +1,13 @@
+@use "pages/Main/main.scss";
+
+@use "components/input/input.scss";
+@use "components/button/button.scss";
+
+.root {
+  height: 100%;
+}
+
+.container {
+  width: min(100% - var(--size-8), var(--container-max, 800px));
+  margin-inline: auto;
+}
