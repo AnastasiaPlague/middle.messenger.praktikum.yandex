@@ -3,9 +3,17 @@
   border-radius: 4px;
   border: none;
   padding: var(--size-2) var(--size-3);
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--purple-8);
+  }
 
   @media (prefers-color-scheme: "light") {
     color: var(--stone-2);
     background-color: var(--purple-5);
+    &:hover {
+      background-color: var(--purple-6);
+    }
   }
 }

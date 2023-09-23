@@ -5,29 +5,43 @@
 }
 
 .main__container {
-  --container-max: 600px;
+  --container-max: 400px;
 }
 
 .login {
   &-title {
+    font-size: var(--font-size-4);
     margin: 0;
+    margin-bottom: var(--size-4);
     text-align: center;
   }
 
   &-card {
     padding: var(--size-7);
-    border: 2px solid var(--stone-7);
+    border: 1px solid var(--stone-7);
     border-radius: 6px;
+    box-shadow: var(--shadow-elevation-low);
+    height: 600px;
   }
 
-  &-form {
-    margin-top: var(--size-8);
-  }
-
-  &-form {
+  &-form,
+  &-controls {
     display: flex;
     flex-flow: column nowrap;
+  }
+
+  &-form {
+    height: 100%;
     gap: var(--size-6);
+  }
+
+  &-controls {
+    margin-top: auto;
+    gap: var(--size-4);
+  }
+
+  &-link {
+    text-align: center;
   }
 }
 

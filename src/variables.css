@@ -52,4 +52,8 @@
   --purple-10: #702682;
   --purple-11: #5a1e69;
   --purple-12: #44174f;
+
+  --blue-4: #4dabf7;
+
+  --shadow-elevation-low: 0px 0px 6px 0px var(--stone-5);
 }
