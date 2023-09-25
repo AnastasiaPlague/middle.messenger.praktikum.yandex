@@ -1,0 +1,40 @@
+.signup {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.signup__container {
+  --container-max: 600px;
+}
+
+.signup {
+  &-title {
+    font-size: var(--font-size-4);
+    margin: 0;
+    margin-bottom: var(--size-4);
+    text-align: center;
+  }
+
+  &-email {
+    grid-column: 1/-1;
+  }
+
+  &-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: var(--size-4);
+  }
+
+  &-controls {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: var(--size-9);
+    gap: var(--size-4);
+    grid-column: 1 / -1;
+  }
+
+  &-link {
+    text-align: center;
+  }
+}

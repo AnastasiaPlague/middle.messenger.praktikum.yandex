@@ -1,10 +1,10 @@
 export const tmpl = `
-<div class="main">
+<div class="main fullscreen-centered">
   <div class="main__container container">
-    <div class="login-card">
+    <div class="card login-card">
     <form novalidate class="login-form">
       <h1 class="login-title">Авторизация</h1>
-      {{{nameInput}}}
+      {{{loginInput}}}
       {{{passwordInput}}}
       <div class="login-controls">
         {{{loginButton}}}

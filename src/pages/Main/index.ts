@@ -1,14 +1,14 @@
 import Handlebars from "handlebars";
+import { Button, Input, Link } from "components";
 
 import { tmpl } from "./main.tmpl";
-import { Button, Input, Link } from "components";
 
 export const Main = () => {
   return Handlebars.compile(tmpl)({
-    nameInput: Input({
-      label: "Имя",
+    loginInput: Input({
+      label: "Логин",
       name: "login",
-      placeholder: "Введите имя",
+      placeholder: "Введите логин",
       type: "text",
       id: "login",
     }),
