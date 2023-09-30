@@ -27,6 +27,7 @@
   &Controls {
     display: flex;
     flex-flow: column nowrap;
+    align-items: center;
     margin-top: var(--size-9);
     gap: var(--size-4);
     grid-column: 1 / -1;

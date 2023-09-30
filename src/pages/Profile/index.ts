@@ -1,22 +1,13 @@
 import Handlebars from "handlebars";
 import { Link } from "components";
+import { USER_MOCK_DATA } from "const";
 
 import { tmpl } from "./profile.tmpl";
 import css from "./profile.module.scss";
 
-const userData = {
-  avatar: "",
-  email: "pochta@mail.ru",
-  login: "crowdcontrol",
-  first_name: "Иннокентий",
-  last_name: "Константинопольский",
-  display_name: "Кеша",
-  phone: "+7 (906) 799 12 09",
-};
-
 export const Profile = () => {
   return Handlebars.compile(tmpl)({
-    userData,
+    userData: USER_MOCK_DATA,
     linkChangeProfile: Link({
       text: "Изменить данные",
       href: "/change-profile",

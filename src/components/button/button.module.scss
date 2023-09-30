@@ -4,6 +4,8 @@
   border: none;
   padding: var(--size-2) var(--size-3);
   transition: background-color 0.2s ease-in-out;
+  width: var(--size-13);
+  max-width: 100%;
 
   &:hover {
     background-color: var(--purple-8);
