@@ -2,6 +2,7 @@ import Handlebars from "handlebars";
 import { Button, Input, Link } from "components";
 
 import { tmpl } from "./main.tmpl";
+import css from "./main.module.scss";
 
 export const Main = () => {
   return Handlebars.compile(tmpl)({
@@ -23,7 +24,7 @@ export const Main = () => {
     linkAuth: Link({
       text: "Нет аккаунта?",
       href: "/sign-up",
-      className: "login-link",
+      className: css.loginLink,
     }),
   });
 };

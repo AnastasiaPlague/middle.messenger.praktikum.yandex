@@ -1,9 +1,10 @@
 import "./index.css";
 import "./styles.scss";
 
-import { Main, Signup } from "./pages";
+import { Chats, Main, Signup } from "./pages";
 
 const ROUTES: Record<string, string> = {
+  "/chats": Chats(),
   "/sign-up": Signup(),
   "/": Main(),
 };

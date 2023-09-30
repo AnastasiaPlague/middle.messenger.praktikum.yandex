@@ -2,6 +2,7 @@ import Handlebars from "handlebars";
 import { Button, Input, Link } from "components";
 
 import { tmpl } from "./signup.tmpl";
+import css from "./signup.module.scss";
 
 export const Signup = () => {
   return Handlebars.compile(tmpl)({
@@ -11,7 +12,7 @@ export const Signup = () => {
       placeholder: "Введите почту",
       type: "email",
       id: "email",
-      className: "signup-email",
+      className: css.signupEmail,
     }),
     loginInput: Input({
       label: "Логин",
@@ -61,7 +62,7 @@ export const Signup = () => {
     linkSignin: Link({
       text: "Войти",
       href: "/",
-      className: "signup-link",
+      className: css.signupLink,
     }),
   });
 };

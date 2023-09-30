@@ -1,12 +1,14 @@
+import css from "./main.module.scss";
+
 export const tmpl = `
-<div class="main fullscreen-centered">
-  <div class="main__container container">
-    <div class="card login-card">
-    <form novalidate class="login-form">
-      <h1 class="login-title">Авторизация</h1>
+<div class="fullscreen-centered">
+  <div class="${css.container} container">
+    <div class="card ${css.loginCard}">
+    <form novalidate class=${css.loginForm}>
+      <h1 class=${css.loginTitle}>Авторизация</h1>
       {{{loginInput}}}
       {{{passwordInput}}}
-      <div class="login-controls">
+      <div class=${css.loginControls}>
         {{{loginButton}}}
         {{{linkAuth}}}
       </div>

@@ -1,36 +1,36 @@
-.main__container {
+.container {
   --container-max: 400px;
 }
 
 .login {
-  &-title {
+  &Title {
     font-size: var(--font-size-4);
     margin: 0;
     margin-bottom: var(--size-4);
     text-align: center;
   }
 
-  &-card {
+  &Card {
     height: 600px;
   }
 
-  &-form,
-  &-controls {
+  &Form,
+  &Controls {
     display: flex;
     flex-flow: column nowrap;
   }
 
-  &-form {
+  &Form {
     height: 100%;
     gap: var(--size-6);
   }
 
-  &-controls {
+  &Controls {
     margin-top: auto;
     gap: var(--size-4);
   }
 
-  &-link {
+  &Link {
     text-align: center;
   }
 }

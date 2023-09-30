@@ -1,3 +1,5 @@
+import css from "./button.module.scss";
+
 export const tmpl = `
-<button class="button">{{text}}</button>
+<button class=${css.button}>{{text}}</button>
 `;

@@ -1,6 +1,8 @@
+import css from "./input.module.scss";
+
 export const tmpl = `
 <div class={{className}}>
-  <label class="label" for="{{id}}">{{label}}</label>
-  <input class="input" type="{{type}}" name="{{name}}" id="{{id}}" placeholder="{{placeholder}}" autocomplete="{{autocomplete}}"/>
+  <label class=${css.label} for="{{id}}">{{label}}</label>
+  <input class=${css.input} type="{{type}}" name="{{name}}" id="{{id}}" placeholder="{{placeholder}}" autocomplete="{{autocomplete}}"/>
 </div>
 `;

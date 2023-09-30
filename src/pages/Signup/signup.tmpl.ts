@@ -1,9 +1,11 @@
+import css from "./signup.module.scss";
+
 export const tmpl = `
-<div class="signup fullscreen-centered">
-  <div class="signup__container container">
+<div class="${css.signup} fullscreen-centered">
+  <div class="${css.signupContainer} container">
     <div class="card">
-    <h1 class="signup-title">Регистрация</h1>
-    <form novalidate class="signup-form">
+    <h1 class="${css.signupTitle}">Регистрация</h1>
+    <form novalidate class="${css.signupForm}">
       {{{emailInput}}}
       {{{loginInput}}}
       {{{firstNameInput}}}
@@ -11,7 +13,7 @@ export const tmpl = `
       {{{phoneInput}}}
       {{{passwordInput}}}
       {{{passwordConfirmInput}}}
-      <div class="signup-controls">
+      <div class="${css.signupControls}">
         {{{signupButton}}}
         {{{linkSignin}}}
       </div>
