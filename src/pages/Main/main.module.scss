@@ -6,7 +6,7 @@
   &Title {
     font-size: var(--font-size-4);
     margin: 0;
-    margin-bottom: var(--size-4);
+    margin-block-end: var(--size-4);
     text-align: center;
   }
 
@@ -26,7 +26,7 @@
   }
 
   &Controls {
-    margin-top: auto;
+    margin-block-start: auto;
     align-items: center;
     gap: var(--size-4);
   }

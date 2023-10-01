@@ -21,7 +21,7 @@
     flex-direction: column;
     min-height: 110px;
     top: var(--size-2);
-    margin-top: var(--size-2);
+    margin-block-start: var(--size-2);
   }
 }
 
@@ -42,8 +42,8 @@
   display: grid;
   align-items: center;
   color: var(--stone-1);
-  margin-top: auto;
-  margin-bottom: var(--size-3);
+  margin-block-start: auto;
+  margin-block-end: var(--size-3);
 
   &Input {
     grid-area: 1/-1;

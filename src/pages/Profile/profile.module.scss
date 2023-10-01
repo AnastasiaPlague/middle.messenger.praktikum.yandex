@@ -75,6 +75,10 @@
 @media (prefers-color-scheme: light) {
   .profileField {
     border-color: var(--stone-4);
+
+    &Value {
+      color: var(--stone-8);
+    }
   }
 
   .profileControls > * {

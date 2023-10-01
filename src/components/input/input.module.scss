@@ -1,6 +1,6 @@
 .label {
   display: block;
-  margin-bottom: var(--size-2);
+  margin-block-end: var(--size-2);
   color: var(--stone-3);
 
   @media (prefers-color-scheme: light) {

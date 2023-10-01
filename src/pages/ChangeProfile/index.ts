@@ -11,6 +11,7 @@ export const ChangeProfile = () => {
     emailInput: Input({
       label: "Почта",
       name: "email",
+      value: USER_MOCK_DATA.email,
       placeholder: "Введите почту",
       type: "email",
       id: "email",
@@ -19,6 +20,7 @@ export const ChangeProfile = () => {
     loginInput: Input({
       label: "Логин",
       name: "login",
+      value: USER_MOCK_DATA.login,
       placeholder: "Введите логин",
       type: "text",
       id: "login",
@@ -27,6 +29,7 @@ export const ChangeProfile = () => {
     firstNameInput: Input({
       label: "Имя",
       name: "first_name",
+      value: USER_MOCK_DATA.first_name,
       placeholder: "Введите имя",
       type: "text",
       id: "first_name",
@@ -34,6 +37,7 @@ export const ChangeProfile = () => {
     lastNameInput: Input({
       label: "Фамилия",
       name: "last_name",
+      value: USER_MOCK_DATA.last_name,
       placeholder: "Введите фамилию",
       type: "text",
       id: "last_name",
@@ -41,6 +45,7 @@ export const ChangeProfile = () => {
     displayNameInput: Input({
       label: "Имя в чате",
       name: "display_name",
+      value: USER_MOCK_DATA.display_name,
       placeholder: "Введите имя в чате",
       type: "text",
       id: "display_name",
@@ -48,6 +53,7 @@ export const ChangeProfile = () => {
     phoneInput: Input({
       label: "Телефон",
       name: "phone",
+      value: USER_MOCK_DATA.phone,
       placeholder: "Введите телефон",
       type: "tel",
       id: "phone",
