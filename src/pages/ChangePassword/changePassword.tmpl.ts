@@ -14,6 +14,7 @@ export const tmpl = `
         {{{passwordConfirmInput}}} 
         <div class=${css.changePasswordControls}>
           {{{buttonSave}}}
+          {{{linkProfile}}}
         </div>
       </form>
     </div>

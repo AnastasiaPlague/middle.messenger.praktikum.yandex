@@ -39,6 +39,7 @@ export const tmpl = `
     <div class=${css.profileControls}>
       {{{linkChangeProfile}}}
       {{{linkChangePassword}}}
+      {{{linkChats}}}
       {{{linkLogout}}}
     </div>
   </div>

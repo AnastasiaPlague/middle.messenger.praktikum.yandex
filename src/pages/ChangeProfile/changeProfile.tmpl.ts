@@ -17,6 +17,7 @@ export const tmpl = `
         {{{phoneInput}}}
         <div class=${css.changeProfileControls}>
           {{{buttonSave}}}
+          {{{linkProfile}}}
         </div>
       </form>
     </div>

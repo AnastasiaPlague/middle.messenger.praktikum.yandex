@@ -1,7 +1,7 @@
 export const USER_MOCK_DATA = {
-  avatar: "",
-  email: "pochta@mail.ru",
-  login: "crowdcontrol",
+  avatar: "/kesha.jpg",
+  email: "toad@mushroom.com",
+  login: "coolesttoad",
   first_name: "Иннокентий",
   last_name: "Константинопольский",
   display_name: "Кеша",
@@ -12,7 +12,7 @@ export const CHAT_MOCK_DATA = [
   {
     user: {
       name: "Michael Scott",
-      avatar: "",
+      avatar: "/michael_scott.jpg",
     },
     message: {
       content: "I am running away from my responsibilities and it feels good.",
@@ -23,7 +23,7 @@ export const CHAT_MOCK_DATA = [
   {
     user: {
       name: "Dwight Shrute",
-      avatar: "",
+      avatar: "/dwight_shrute.jpg",
     },
     message: {
       content:
@@ -35,7 +35,7 @@ export const CHAT_MOCK_DATA = [
   {
     user: {
       name: "Stanley Hudson",
-      avatar: "",
+      avatar: "/stanley_hudson.jpg",
     },
     message: {
       content: "If I don't have some cake soon, I might die.",

@@ -18,6 +18,11 @@ export const Profile = () => {
       href: "/change-password",
       className: css.profileControlsLink,
     }),
+    linkChats: Link({
+      text: "Назад к чатам",
+      href: "/chats",
+      className: css.profileControlsLink,
+    }),
     linkLogout: Link({
       text: "Выйти",
       href: "/",

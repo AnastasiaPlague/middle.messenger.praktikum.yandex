@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import { Button, Input } from "components";
+import { Button, Input, Link } from "components";
 import { USER_MOCK_DATA } from "const";
 
 import { tmpl } from "./changeProfile.tmpl";
@@ -54,6 +54,10 @@ export const ChangeProfile = () => {
     }),
     buttonSave: Button({
       text: "Сохранить",
+    }),
+    linkProfile: Link({
+      text: "Назад",
+      href: "/profile",
     }),
   });
 };

@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import { Button, Input } from "components";
+import { Button, Input, Link } from "components";
 import { USER_MOCK_DATA } from "const";
 
 import { tmpl } from "./changePassword.tmpl";
@@ -9,17 +9,17 @@ export const ChangePassword = () => {
     userData: USER_MOCK_DATA,
     oldPasswordInput: Input({
       label: "Старый пароль",
-      name: "old_password",
+      name: "oldPassword",
       placeholder: "Введите старый пароль",
       type: "password",
-      id: "email",
+      id: "oldPassword",
     }),
     newPasswordInput: Input({
       label: "Пароль",
-      name: "password",
+      name: "newPassword",
       placeholder: "Введите пароль",
       type: "password",
-      id: "password",
+      id: "newPassword",
       autocomplete: "new-password",
     }),
     passwordConfirmInput: Input({
@@ -32,6 +32,10 @@ export const ChangePassword = () => {
     }),
     buttonSave: Button({
       text: "Сохранить",
+    }),
+    linkProfile: Link({
+      text: "Назад",
+      href: "/profile",
     }),
   });
 };
