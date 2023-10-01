@@ -3,17 +3,7 @@
   margin-block-start: var(--size-12);
 }
 
-%field {
-  padding-block-start: var(--size-3);
-  padding-block-end: var(--size-2);
-  font-weight: 500;
-}
-
 .changeProfile {
-  &Fields > * + * {
-    border-top: 1px solid var(--stone-7);
-  }
-
   &Container {
     display: flex;
     flex-direction: column;
@@ -29,44 +19,23 @@
     }
   }
 
-  &Name {
-    font-size: var(--font-size-4);
-    font-weight: 500;
-    text-align: center;
+  &Form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: var(--size-4);
     margin-block-start: var(--size-8);
-    margin-block-end: var(--size-10);
+  }
+
+  &Email,
+  &Login {
+    grid-column: 1/-1;
   }
 
   &Controls {
     display: flex;
-    justify-content: center;
-    margin-block-start: var(--size-10);
-  }
-}
-
-.changeProfileField {
-  @extend %field;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-
-  &Name {
-    margin-inline-end: var(--size-2);
-  }
-
-  &Value {
-    color: var(--stone-5);
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .changeProfileField {
-    border-color: var(--stone-4);
-  }
-
-  .changeProfileControls > * {
-    border-color: var(--stone-4);
+    flex-flow: column nowrap;
+    align-items: center;
+    grid-column: 1/-1;
+    margin-block-start: var(--size-9);
   }
 }

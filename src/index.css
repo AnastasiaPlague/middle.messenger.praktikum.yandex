@@ -56,14 +56,13 @@ a {
   color: var(--blue-4);
 }
 
-:is(a, button, input, textarea, summary):focus {
-  outline: 2px solid var(--purple-2);
-  outline-offset: 6px;
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
-:is(a, button, input, textarea, summary):focus-visible {
+:focus-visible {
   outline: 2px solid var(--purple-2);
-  outline-offset: 6px;
+  outline-offset: 4px;
 }
 
 @media (prefers-color-scheme: light) {
