@@ -2,7 +2,7 @@
 
 # Мессенджер
 
-Прототип Figma:
+Прототип Figma: https://www.figma.com/file/liQi9OVGzJUWa2JQExwIHU/Yandex-Messenger?type=design&node-id=0%3A1&mode=design&t=7cEQcAJmtgD6tksO-1
 
 Демо на Netlify: https://ya-p-messenger.netlify.app/
 
