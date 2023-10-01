@@ -3,7 +3,7 @@ export const USER_MOCK_DATA = {
   email: "toad@mushroom.com",
   login: "coolesttoad",
   first_name: "Иннокентий",
-  last_name: "Константинопольский",
+  second_name: "Константинопольский",
   display_name: "Кеша",
   phone: "+7 (906) 799 12 09",
 };
