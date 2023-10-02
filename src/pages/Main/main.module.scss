@@ -1,0 +1,37 @@
+.container {
+  --container-max: 400px;
+}
+
+.login {
+  &Title {
+    font-size: var(--font-size-4);
+    margin: 0;
+    margin-block-end: var(--size-4);
+    text-align: center;
+  }
+
+  &Card {
+    height: 600px;
+  }
+
+  &Form,
+  &Controls {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  &Form {
+    height: 100%;
+    gap: var(--size-6);
+  }
+
+  &Controls {
+    margin-block-start: auto;
+    align-items: center;
+    gap: var(--size-4);
+  }
+
+  &Link {
+    text-align: center;
+  }
+}

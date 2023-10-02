@@ -1,0 +1,25 @@
+.root {
+  height: 100%;
+}
+
+.container {
+  width: min(100% - var(--size-8), var(--container-max, 800px));
+  margin-inline: auto;
+}
+
+.card {
+  padding: var(--size-7);
+  border: 1px solid var(--stone-7);
+  border-radius: 6px;
+  box-shadow: var(--shadow-elevation-low);
+
+  @media (prefers-color-scheme: "light") {
+    border-color: var(--stone-4);
+  }
+}
+
+.fullscreen-centered {
+  height: 100%;
+  display: grid;
+  place-items: center;
+}

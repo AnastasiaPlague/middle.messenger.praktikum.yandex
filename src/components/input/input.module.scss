@@ -1,0 +1,39 @@
+.label {
+  display: block;
+  margin-block-end: var(--size-2);
+  color: var(--stone-3);
+
+  @media (prefers-color-scheme: light) {
+    color: var(--stone-8);
+  }
+}
+
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--size-2) var(--size-3);
+  border: 1px solid var(--stone-7);
+  border-radius: 4px;
+  background-color: var(--stone-10);
+
+  &::placeholder {
+    color: var(--stone-6);
+  }
+
+  &:autofill,
+  &:-webkit-autofill {
+    box-shadow: 0 0 0 1000px var(--stone-10) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  @media (prefers-color-scheme: light) {
+    border-color: var(--stone-4);
+    background-color: var(--stone-1);
+
+    &:autofill,
+    &:-webkit-autofill {
+      box-shadow: 0 0 0 1000px var(--stone-1) inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+  }
+}

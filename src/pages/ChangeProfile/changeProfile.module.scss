@@ -1,0 +1,70 @@
+.container {
+  --container-max: 600px;
+  margin-block-start: var(--size-12);
+}
+
+.profile {
+  &Container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &Avatar {
+    display: grid;
+    align-self: center;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover &Label {
+      display: flex;
+    }
+
+    &Img {
+      grid-area: 1/-1;
+      object-fit: cover;
+    }
+
+    &Label {
+      display: none;
+      cursor: pointer;
+      grid-area: 1/-1;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 150px;
+      background-color: var(--stone-5);
+
+      &Text {
+        text-align: center;
+        font-size: var(--font-size-3);
+        color: var(--stone-10);
+      }
+    }
+
+    &Input {
+      display: none;
+    }
+  }
+
+  &Form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: var(--size-4);
+    margin-block-start: var(--size-8);
+  }
+
+  &Email,
+  &Login {
+    grid-column: 1/-1;
+  }
+
+  &Controls {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: var(--size-4);
+    grid-column: 1/-1;
+    margin-block-start: var(--size-10);
+  }
+}

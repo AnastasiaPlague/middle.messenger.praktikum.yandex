@@ -1,0 +1,14 @@
+.container {
+  --container-max: 400px;
+  text-align: center;
+}
+
+.title {
+  font-size: var(--font-size-8);
+  font-family: monospace;
+}
+
+.linkBack {
+  display: inline-block;
+  margin-block-start: var(--size-6);
+}

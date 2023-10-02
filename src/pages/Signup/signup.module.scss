@@ -1,0 +1,39 @@
+.signup {
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  &Container {
+    --container-max: 600px;
+  }
+
+  &Title {
+    font-size: var(--font-size-4);
+    margin: 0;
+    margin-block-end: var(--size-4);
+    text-align: center;
+  }
+
+  &Email {
+    grid-column: 1/-1;
+  }
+
+  &Form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: var(--size-4);
+  }
+
+  &Controls {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-block-start: var(--size-9);
+    gap: var(--size-4);
+    grid-column: 1 / -1;
+  }
+
+  &Link {
+    text-align: center;
+  }
+}
