@@ -36,11 +36,11 @@ export const ChangeProfile = () => {
     }),
     lastNameInput: Input({
       label: "Фамилия",
-      name: "last_name",
-      value: USER_MOCK_DATA.last_name,
+      name: "second_name",
+      value: USER_MOCK_DATA.second_name,
       placeholder: "Введите фамилию",
       type: "text",
-      id: "last_name",
+      id: "second_name",
     }),
     displayNameInput: Input({
       label: "Имя в чате",

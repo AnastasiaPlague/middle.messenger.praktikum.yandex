@@ -30,10 +30,10 @@ export const Signup = () => {
     }),
     lastNameInput: Input({
       label: "Фамилия",
-      name: "last_name",
+      name: "second_name",
       placeholder: "Введите фамилию",
       type: "text",
-      id: "last_name",
+      id: "second_name",
     }),
     phoneInput: Input({
       label: "Телефон",

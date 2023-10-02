@@ -23,7 +23,7 @@ export const tmpl = `
         </div>
         <div class=${css.profileField}>
           <span class=${css.profileFieldName}>Фамилия</span>
-          <span class=${css.profileFieldValue}>{{last_name}}</span> 
+          <span class=${css.profileFieldValue}>{{second_name}}</span> 
         </div>
         <div class=${css.profileField}>
           <span class=${css.profileFieldName}>Имя в чате</span>
