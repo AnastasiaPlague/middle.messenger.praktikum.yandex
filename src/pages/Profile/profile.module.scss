@@ -50,6 +50,7 @@
     }
 
     &Danger {
+      @extend %field;
       color: var(--red-0);
     }
   }

@@ -18,12 +18,17 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+
     "baseUrl": ".",
     "paths": {
       "*": ["src/*"],
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"],
-      "const/*": ["src/const/*"]
+      "const/*": ["src/const/*"],
+      "utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"]
