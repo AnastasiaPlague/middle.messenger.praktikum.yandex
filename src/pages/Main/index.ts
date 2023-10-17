@@ -1,5 +1,5 @@
 import { Block } from "utils";
-import { Button, Input, Link } from "components";
+import { Button, Form, Link } from "components";
 
 import css from "./main.module.scss";
 
@@ -11,21 +11,27 @@ export class Main extends Block {
   init() {
     this.element!.classList.add("fullscreen-centered");
     this.children = {
-      loginInput: new Input({
-        label: "Логин",
-        name: "login",
-        placeholder: "Введите логин",
-        type: "text",
+      form: new Form({
+        className: css.loginForm,
         id: "login",
+        fields: [
+          {
+            label: "Логин",
+            name: "login",
+            placeholder: "Введите логин",
+            type: "text",
+            id: "login",
+          },
+          {
+            label: "Пароль",
+            name: "password",
+            placeholder: "Введите пароль",
+            type: "password",
+            id: "password",
+          },
+        ],
       }),
-      passwordInput: new Input({
-        label: "Пароль",
-        name: "password",
-        placeholder: "Введите пароль",
-        type: "password",
-        id: "password",
-      }),
-      loginButton: new Button({ text: "Войти" }),
+      loginButton: new Button({ text: "Войти", formId: "login" }),
       linkAuth: new Link({
         text: "Нет аккаунта?",
         href: "/sign-up",
@@ -39,15 +45,12 @@ export class Main extends Block {
       `
       <div class="${css.container} container">
         <div class="card ${css.loginCard}">
-        <form novalidate class=${css.loginForm}>
           <h1 class=${css.loginTitle}>Авторизация</h1>
-          {{{loginInput}}}
-          {{{passwordInput}}}
+          {{{form}}}
           <div class=${css.loginControls}>
             {{{loginButton}}}
             {{{linkAuth}}}
           </div>
-          </form>
         </div>
       </div>
     `,

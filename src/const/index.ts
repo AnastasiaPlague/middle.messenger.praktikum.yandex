@@ -1,3 +1,5 @@
+import { ValidatorType } from "types";
+
 export const USER_MOCK_DATA = {
   avatar: "/kesha.jpg",
   email: "toad@mushroom.com",
@@ -55,8 +57,6 @@ export const passwordRegexp = /^(?=.*\d)(?=.*[A-Z]).{8,40}$/; // хотя бы �
 
 export const phoneRegexp = /^\+?[\d]{10,15}/; // может начинаться с плюса, цифры
 
-type ValidatorType = (arg: string[]) => boolean;
-
 export const VALIDATORS: { [key: string]: ValidatorType } = {
   email: ([value]) => emailRegExp.test(value),
   login: ([value]) => loginRegexp.test(value),
@@ -64,7 +64,7 @@ export const VALIDATORS: { [key: string]: ValidatorType } = {
   second_name: ([value]) => nameRegexp.test(value),
   phone: ([value]) => phoneRegexp.test(value),
   password: ([value]) => passwordRegexp.test(value),
-  confirm_password: ([value1, value2]) => value1 === value2,
+  newPassword: ([value]) => passwordRegexp.test(value),
 };
 
 export const VALIDATOR_ERRORS: Record<string, string> = {
@@ -74,5 +74,6 @@ export const VALIDATOR_ERRORS: Record<string, string> = {
   second_name: "Укажите с заглавной буквы, от 3 до 20 символов",
   phone: "Укажите верный формат без дефисов, от 10 до 15 символов",
   password: "Должен содержать заглавную букву или цифру, от 8 до 40 символов",
-  confirm_password: "Пароли не совпадают",
+  newPassword:
+    "Должен содержать заглавную букву или цифру, от 8 до 40 символов",
 };

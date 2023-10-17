@@ -26,13 +26,7 @@ export class Input extends Block {
     }
     const { name, value } = e.target;
 
-    let errorMessage;
-    if (name === "confirm_password") {
-      const passwordField = e.target.form!.password;
-      errorMessage = validate(name, passwordField?.value ?? "", value);
-    } else {
-      errorMessage = validate(name, value);
-    }
+    const errorMessage = validate(name, value);
 
     this.setProps({
       errorMessage,

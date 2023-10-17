@@ -45,13 +45,7 @@ export class Form extends Block {
           (field: any) => field.props.name === name
         );
 
-        let errorMessage;
-        if (name === "confirm_password") {
-          const passwordField = form!.password;
-          errorMessage = validate(name, passwordField?.value ?? "", value);
-        } else {
-          errorMessage = validate(name, value);
-        }
+        const errorMessage = validate(name, value);
 
         currentField?.setProps({
           errorMessage,
