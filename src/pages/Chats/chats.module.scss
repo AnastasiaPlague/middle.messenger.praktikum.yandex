@@ -34,7 +34,7 @@
     display: inline-block;
     margin-inline-start: var(--size-2);
     vertical-align: middle;
-    fill: currentColor;
+    fill: currentcolor;
   }
 }
 
@@ -42,15 +42,13 @@
   display: grid;
   align-items: center;
   color: var(--stone-1);
-  margin-block-start: auto;
-  margin-block-end: var(--size-3);
+  margin-block: auto var(--size-3);
 
   &Input {
     grid-area: 1/-1;
     padding-block: var(--size-2) var(--size-2);
-    padding-inline-start: var(--size-7);
-    padding-inline-end: var(--size-3);
-    border: none;
+    padding-inline: var(--size-7) var(--size-3);
+    border: 0;
     border-radius: 4px;
     background-color: var(--stone-10);
     text-overflow: ellipsis;
@@ -79,14 +77,15 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  --_separator-color: var(--stone-7);
 
-  &Item:first-child {
-    border-top: 1px solid var(--_separator-color);
-  }
+  --_separator-color: var(--stone-7);
 
   &Item {
     border-bottom: 1px solid var(--_separator-color);
+  }
+
+  &Item:first-child {
+    border-top: 1px solid var(--_separator-color);
   }
 }
 
@@ -106,6 +105,7 @@
 
   &Content {
     flex-grow: 1;
+
     /* enable text truncating */
     min-width: 0;
   }
@@ -149,10 +149,6 @@
 
 .chatInfo + .chatInfo {
   margin-block-start: var(--size-2);
-}
-
-.currentChat {
-  place-self: center;
 }
 
 @media (prefers-color-scheme: light) {

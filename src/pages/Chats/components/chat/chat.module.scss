@@ -1,0 +1,114 @@
+%button {
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  flex-shrink: 0;
+}
+
+.chat {
+  &Wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    margin-inline: var(--size-4);
+  }
+
+  &Input {
+    width: 100%;
+  }
+}
+
+.chatNav {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: var(--size-3);
+  padding: var(--size-4) var(--size-2);
+  border-bottom: 2px solid var(--stone-7);
+
+  &Avatar {
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: var(--stone-7);
+    flex-shrink: 0;
+  }
+
+  &Username {
+    font-weight: 500;
+    margin: 0;
+  }
+
+  &ActionsButton {
+    @extend %button;
+
+    padding: var(--size-2) var(--size-4);
+    background-color: transparent;
+    margin-inline-start: auto;
+    color: var(--stone-4);
+  }
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: var(--size-3);
+  width: 100%;
+  margin-block-start: auto;
+  padding: var(--size-4) var(--size-2);
+  border-top: 2px solid var(--stone-7);
+
+  &Wrapper {
+    width: 100%;
+  }
+
+  &SendButton {
+    @extend %button;
+
+    background-color: var(--purple-10);
+    border-radius: 50%;
+    width: var(--size-7);
+  }
+
+  &ActionsButton {
+    @extend %button;
+
+    color: var(--stone-4);
+    background-color: transparent;
+    width: var(--size-8);
+  }
+
+  &SendIcon {
+    fill: var(--stone-4);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .form,
+  .chatNav {
+    border-color: var(--stone-4);
+  }
+
+  .form {
+    &SendButton {
+      background-color: var(--purple-5);
+    }
+
+    &SendIcon {
+      fill: var(--stone-0);
+    }
+
+    &ActionsButton {
+      color: var(--stone-5);
+    }
+  }
+
+  .chatNav {
+    &ActionsButton {
+      color: var(--stone-5);
+    }
+  }
+}

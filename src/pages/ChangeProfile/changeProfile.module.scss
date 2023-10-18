@@ -1,5 +1,6 @@
 .container {
   --container-max: 600px;
+
   margin-block-start: var(--size-12);
 }
 
@@ -16,15 +17,6 @@
     overflow: hidden;
     cursor: pointer;
 
-    &:hover &Label {
-      display: flex;
-    }
-
-    &Img {
-      grid-area: 1/-1;
-      object-fit: cover;
-    }
-
     &Label {
       display: none;
       cursor: pointer;
@@ -39,6 +31,15 @@
         text-align: center;
         font-size: var(--font-size-3);
         color: var(--stone-10);
+      }
+
+      &:hover &Label {
+        display: flex;
+      }
+
+      &Img {
+        grid-area: 1/-1;
+        object-fit: cover;
       }
     }
 
