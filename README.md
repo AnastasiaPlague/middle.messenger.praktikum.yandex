@@ -36,6 +36,18 @@ npm run start
 npm run dev
 ```
 
+Линтинг и проверка типов:
+
+```bash
+npm run lint
+```
+
+Линтинг стилей:
+
+```bash
+npm run lint:styles
+```
+
 ## Ссылки на страницы:
 
 - [Главная](https://ya-p-messenger.netlify.app/)

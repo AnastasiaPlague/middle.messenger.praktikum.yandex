@@ -15,7 +15,8 @@
   }
 
   &Form,
-  &Controls {
+  &Controls,
+  &Card {
     display: flex;
     flex-flow: column nowrap;
   }
