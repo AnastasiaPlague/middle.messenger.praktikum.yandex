@@ -1,5 +1,6 @@
 export type InputProps = Partial<HTMLInputElement> & {
-  label: string;
+  label?: string;
+  optional?: boolean;
 };
 
 export type ValidatorType = (arg: string[]) => boolean;

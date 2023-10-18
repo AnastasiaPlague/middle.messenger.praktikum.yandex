@@ -151,10 +151,6 @@
   margin-block-start: var(--size-2);
 }
 
-.currentChat {
-  place-self: center;
-}
-
 @media (prefers-color-scheme: light) {
   .chatsContainer {
     border-color: var(--stone-4);

@@ -152,6 +152,8 @@ export class Block<P extends Record<string, any> = any> {
 
     this._element!.append(fragment);
 
+    this._removeEvents();
+
     this._addEvents();
   }
 

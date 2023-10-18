@@ -65,6 +65,7 @@ export const VALIDATORS: { [key: string]: ValidatorType } = {
   phone: ([value]) => phoneRegexp.test(value),
   password: ([value]) => passwordRegexp.test(value),
   newPassword: ([value]) => passwordRegexp.test(value),
+  message: ([value]) => !!value,
 };
 
 export const VALIDATOR_ERRORS: Record<string, string> = {

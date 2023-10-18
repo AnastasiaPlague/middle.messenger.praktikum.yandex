@@ -21,7 +21,7 @@ export class Input extends Block {
   }
 
   handleBlur(e: Event & { target: HTMLInputElement }) {
-    if (!e.target.name) {
+    if (!e.target.name || this.props.optional) {
       return;
     }
     const { name, value } = e.target;
@@ -37,7 +37,7 @@ export class Input extends Block {
   render() {
     return this.compile(
       `
-      <label class=${css.label} for="{{id}}">{{label}}</label>
+      {{#if label}}<label class=${css.label} for="{{id}}">{{label}}</label>{{/if}}
       <input class=${css.input} type="{{type}}" name="{{name}}" id="{{id}}" placeholder="{{placeholder}}" {{#if value}} value="{{value}}" {{/if}} autocomplete="{{autocomplete}}"/>
       {{#if errorMessage}}<span class=${css.error}>{{errorMessage}}</span>{{/if}}
     `,

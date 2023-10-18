@@ -13,7 +13,7 @@ export class Main extends Block {
     this.children = {
       form: new Form({
         className: css.loginForm,
-        id: "login",
+        id: "signin",
         fields: [
           {
             label: "Логин",
@@ -31,7 +31,7 @@ export class Main extends Block {
           },
         ],
       }),
-      loginButton: new Button({ text: "Войти", formId: "login" }),
+      loginButton: new Button({ text: "Войти", formId: "signin" }),
       linkAuth: new Link({
         text: "Нет аккаунта?",
         href: "/sign-up",

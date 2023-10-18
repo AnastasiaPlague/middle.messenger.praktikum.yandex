@@ -2,6 +2,7 @@ import { Block } from "utils";
 import { CHAT_MOCK_DATA } from "const";
 
 import css from "./chats.module.scss";
+import { Chat } from "./components";
 
 export class Chats extends Block {
   constructor() {
@@ -10,6 +11,10 @@ export class Chats extends Block {
 
   init() {
     this.element!.classList.add(css.chats);
+
+    this.children = {
+      chat: new Chat(),
+    };
   }
 
   render() {
@@ -53,9 +58,7 @@ export class Chats extends Block {
           </ul>
         </div>
       </div>
-      <div class=${css.currentChat}>
-        <p>Выберите чат чтобы отправить сообщение</p>
-      </div>
+       {{{chat}}}
     `,
       this.props
     );
