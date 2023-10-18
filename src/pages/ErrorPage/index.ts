@@ -33,7 +33,7 @@ export class ErrorPage extends Block {
         {{{linkBack}}}  
       </div>
     `,
-      this.props
+      this.props,
     );
   }
 }

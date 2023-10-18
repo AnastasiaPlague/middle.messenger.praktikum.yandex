@@ -9,7 +9,7 @@ export class Form extends Block {
 
   protected init() {
     this.children.fields = this.props.fields.map(
-      (props: InputProps) => new Input(props)
+      (props: InputProps) => new Input(props),
     );
 
     if (this.props.className) {
@@ -31,18 +31,18 @@ export class Form extends Block {
 
     const form = e.target;
     const formElements = [...form.elements].filter(
-      (el) => el instanceof HTMLInputElement
+      (el) => el instanceof HTMLInputElement,
     ) as HTMLInputElement[];
 
     const formData = Object.fromEntries(new FormData(form));
     console.log(form.name, formData);
 
-    for (let element of formElements) {
+    for (const element of formElements) {
       const { name, value } = element;
 
       if (Array.isArray(this.children.fields)) {
         const currentField = this.children.fields.find(
-          (field: any) => field.props.name === name
+          (field: any) => field.props.name === name,
         );
 
         const errorMessage = validate(name, value);
@@ -62,7 +62,7 @@ export class Form extends Block {
         {{{this}}}
       {{/each}}
     `,
-      this.props
+      this.props,
     );
   }
 }

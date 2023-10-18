@@ -70,7 +70,7 @@ export class ChangePassword extends Block {
         </div>
       </div>
     `,
-      this.props
+      this.props,
     );
   }
 }

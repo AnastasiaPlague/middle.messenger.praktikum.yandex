@@ -60,7 +60,7 @@ export class Chats extends Block {
       </div>
        {{{chat}}}
     `,
-      this.props
+      this.props,
     );
   }
 }

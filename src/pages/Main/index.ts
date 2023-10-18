@@ -54,7 +54,7 @@ export class Main extends Block {
         </div>
       </div>
     `,
-      this.props
+      this.props,
     );
   }
 }

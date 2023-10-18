@@ -16,9 +16,9 @@ type Options = {
 
 type HTTPMethod = (url: string, options?: Options) => Promise<XMLHttpRequest>;
 
-function fetchWithRetry(
+export function fetchWithRetry(
   url: string,
-  options: Options = { method: METHOD.GET }
+  options: Options = { method: METHOD.GET },
 ): Promise<XMLHttpRequest> {
   const { retries = 1 } = options;
 
@@ -38,12 +38,10 @@ function queryStringify(data: any): string | null {
   if (!data) {
     return null;
   }
-  let arr = [];
+  const arr = [];
   for (const [key, value] of Object.entries(data)) {
     arr.push(`${key}=${value}`);
   }
-
-  // Можно делать трансформацию GET-параметров в отдельной функции
 
   return "?" + arr.join("&");
 }
@@ -72,7 +70,7 @@ class HTTPTransport {
 
   request: HTTPMethod = (
     url,
-    options = { method: METHOD.GET, timeout: 5000 }
+    options = { method: METHOD.GET, timeout: 5000 },
   ) => {
     return new Promise((resolve, reject) => {
       const { method, data, headers, timeout } = options;

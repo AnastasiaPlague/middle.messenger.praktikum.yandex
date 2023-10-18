@@ -41,7 +41,7 @@ export class Input extends Block {
       <input class=${css.input} type="{{type}}" name="{{name}}" id="{{id}}" placeholder="{{placeholder}}" {{#if value}} value="{{value}}" {{/if}} autocomplete="{{autocomplete}}"/>
       {{#if errorMessage}}<span class=${css.error}>{{errorMessage}}</span>{{/if}}
     `,
-      this.props
+      this.props,
     );
   }
 }

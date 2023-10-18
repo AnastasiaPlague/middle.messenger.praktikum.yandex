@@ -92,7 +92,7 @@ export class Signup extends Block {
         </div>
       </div>
     `,
-      this.props
+      this.props,
     );
   }
 }

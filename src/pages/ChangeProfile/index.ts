@@ -100,7 +100,7 @@ export class ChangeProfile extends Block {
         </div>
       </div>
     `,
-      this.props
+      this.props,
     );
   }
 }

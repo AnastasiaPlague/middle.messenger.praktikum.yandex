@@ -9,7 +9,6 @@
   --font-size-6: 2.5rem;
   --font-size-7: 3rem;
   --font-size-8: 3.5rem;
-
   --size-1: 0.25rem;
   --size-2: 0.5rem;
   --size-3: 1rem;
@@ -25,7 +24,6 @@
   --size-13: 15rem;
   --size-14: 20rem;
   --size-15: 30rem;
-
   --stone-0: #f8fafb;
   --stone-1: #f2f4f6;
   --stone-2: #ebedef;
@@ -39,7 +37,6 @@
   --stone-10: #3a3a37;
   --stone-11: #252521;
   --stone-12: #121210;
-
   --purple-0: #f8f0fc;
   --purple-1: #f3d9fa;
   --purple-2: #eebefa;
@@ -53,12 +50,9 @@
   --purple-10: #702682;
   --purple-11: #5a1e69;
   --purple-12: #44174f;
-
   --blue-4: #4dabf7;
-
   --red-0: #c92a2a;
   --red-1: #962020;
   --red-2: #ff8787;
-
-  --shadow-elevation-low: 0px 0px 6px 0px var(--stone-5);
+  --shadow-elevation-low: 0 0 6px 0 var(--stone-5);
 }

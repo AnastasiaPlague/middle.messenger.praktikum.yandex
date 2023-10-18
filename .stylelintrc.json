@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-standard-scss",
+    "stylelint-config-sass-guidelines"
+  ],
+  "rules": {
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "scss/operator-no-unspaced": null,
+    "custom-property-pattern": null,
+    "color-named": null,
+    "selector-no-qualifying-type": [true, { "ignore": ["attribute"] }],
+    "max-nesting-depth": [4, { "ignore": ["pseudo-classes"] }],
+    "selector-class-pattern": null
+  }
+}
