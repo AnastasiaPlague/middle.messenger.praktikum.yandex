@@ -6,12 +6,10 @@ import css from "./changePassword.module.scss";
 
 export class ChangePassword extends Block {
   constructor() {
-    super("div", { userData: USER_MOCK_DATA });
+    super({ userData: USER_MOCK_DATA });
   }
 
   init() {
-    this.element!.classList.add("container", css.container);
-
     this.children = {
       form: new Form({
         className: css.changePasswordForm,
@@ -56,16 +54,18 @@ export class ChangePassword extends Block {
   render() {
     return this.compile(
       `
-      <div class=${css.changePasswordContainer}>
-        {{#with userData}}
-          <div class=${css.changePasswordAvatar}>
-            <img class=${css.changePasswordAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
-          </div>  
-        {{/with}}
-          {{{form}}}
-          <div class=${css.changePasswordControls}>
-            {{{buttonSave}}}
-            {{{linkProfile}}}
+      <div class="${css.container} container">
+        <div class=${css.changePasswordContainer}>
+          {{#with userData}}
+            <div class=${css.changePasswordAvatar}>
+              <img class=${css.changePasswordAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+            </div>  
+          {{/with}}
+            {{{form}}}
+            <div class=${css.changePasswordControls}>
+              {{{buttonSave}}}
+              {{{linkProfile}}}
+            </div>
           </div>
         </div>
       </div>

@@ -6,11 +6,10 @@ import css from "./changeProfile.module.scss";
 
 export class ChangeProfile extends Block {
   constructor() {
-    super("div", { userData: USER_MOCK_DATA });
+    super({ userData: USER_MOCK_DATA });
   }
 
   init() {
-    this.element!.classList.add("container", css.container);
     this.children = {
       form: new Form({
         className: css.profileForm,
@@ -82,20 +81,22 @@ export class ChangeProfile extends Block {
   render() {
     return this.compile(
       `
-      <div class=${css.profileContainer}>
-        {{#with userData}}
-          <form class=${css.profileAvatar}>
-            <img class=${css.profileAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
-            <label for="avatar" class=${css.profileAvatarLabel}>
-              <p class=${css.profileAvatarLabelText}>Поменять аватар</p>
-            </label>
-            <input type="file" id="avatar" name="avatar" class=${css.profileAvatarInput} />      
-          </form> 
-        {{/with}}
-          {{{form}}}
-          <div class=${css.profileControls}>
-            {{{buttonSave}}}
-            {{{linkProfile}}}
+      <div class="${css.container} container">
+        <div class=${css.profileContainer}>
+          {{#with userData}}
+            <form class=${css.profileAvatar}>
+              <img class=${css.profileAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+              <label for="avatar" class=${css.profileAvatarLabel}>
+                <p class=${css.profileAvatarLabelText}>Поменять аватар</p>
+              </label>
+              <input type="file" id="avatar" name="avatar" class=${css.profileAvatarInput} />      
+            </form> 
+          {{/with}}
+            {{{form}}}
+            <div class=${css.profileControls}>
+              {{{buttonSave}}}
+              {{{linkProfile}}}
+            </div>
           </div>
         </div>
       </div>

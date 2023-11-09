@@ -10,11 +10,10 @@ type ErrorPageProps = {
 
 export class ErrorPage extends Block {
   constructor(props: ErrorPageProps) {
-    super("div", props);
+    super(props);
   }
 
   init() {
-    this.element!.classList.add("fullscreen-centered");
     this.children = {
       linkBack: new Link({
         text: "Назад к чатам",
@@ -27,10 +26,12 @@ export class ErrorPage extends Block {
   render() {
     return this.compile(
       `
-      <div class="${css.container} container">
-        <h1 class=${css.title}>{{errorCode}}</h1>
-        <p>{{text}}</p>
-        {{{linkBack}}}  
+      <div class="fullscreen-centered">
+        <div class="${css.container} container">
+          <h1 class=${css.title}>{{errorCode}}</h1>
+          <p>{{text}}</p>
+          {{{linkBack}}}  
+        </div>
       </div>
     `,
       this.props,

@@ -5,11 +5,10 @@ import css from "./main.module.scss";
 
 export class Main extends Block {
   constructor() {
-    super("div", {});
+    super({});
   }
 
   init() {
-    this.element!.classList.add("fullscreen-centered");
     this.children = {
       form: new Form({
         className: css.loginForm,
@@ -43,13 +42,15 @@ export class Main extends Block {
   render() {
     return this.compile(
       `
-      <div class="${css.container} container">
-        <div class="card ${css.loginCard}">
-          <h1 class=${css.loginTitle}>Авторизация</h1>
-          {{{form}}}
-          <div class=${css.loginControls}>
-            {{{loginButton}}}
-            {{{linkAuth}}}
+      <div class="fullscreen-centered">
+        <div class="${css.container} container">
+          <div class="card ${css.loginCard}">
+            <h1 class=${css.loginTitle}>Авторизация</h1>
+            {{{form}}}
+            <div class=${css.loginControls}>
+              {{{loginButton}}}
+              {{{linkAuth}}}
+            </div>
           </div>
         </div>
       </div>

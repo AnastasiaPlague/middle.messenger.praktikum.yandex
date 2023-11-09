@@ -6,17 +6,15 @@ type LinkProps = Partial<HTMLLinkElement> & {
 
 export class Link extends Block {
   constructor(props: LinkProps) {
-    super("a", props);
-  }
-
-  protected init() {
-    if (this.props.className) {
-      this.element!.classList.add(this.props.className);
-    }
-    this.element!.setAttribute("href", this.props.href);
+    super(props);
   }
 
   render() {
-    return this.compile(`{{text}}`, this.props);
+    return this.compile(
+      `
+    <a href={{href}} {{#if className}} class="{{className}}" {{/if}}>{{text}}</a>
+    `,
+      this.props,
+    );
   }
 }

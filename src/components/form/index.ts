@@ -4,7 +4,7 @@ import { Block, validate } from "utils";
 
 export class Form extends Block {
   constructor(props: Partial<HTMLFormElement>) {
-    super("form", props);
+    super(props);
   }
 
   protected init() {
@@ -12,12 +12,6 @@ export class Form extends Block {
       (props: InputProps) => new Input(props),
     );
 
-    if (this.props.className) {
-      this.element!.classList.add(this.props.className);
-    }
-    this.element!.setAttribute("id", this.props.id ?? "");
-    this.element!.setAttribute("novalidate", "");
-    this.element!.setAttribute("name", this.props.id ?? "");
     this.setProps({
       events: {
         submit: (e: Event & { target: HTMLFormElement }) =>
@@ -57,10 +51,11 @@ export class Form extends Block {
 
   render() {
     return this.compile(
-      `
+      `<form  {{#if className}} class="{{className}}" {{/if}} {{#if id}} id="{{id}}" name="{{id}}" {{/if}} novalidate  >
       {{#each fields}}
         {{{this}}}
       {{/each}}
+      </form>
     `,
       this.props,
     );
