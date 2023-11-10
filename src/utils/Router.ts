@@ -1,3 +1,4 @@
+import { Routes } from "const";
 import { Block } from "./Block";
 
 function isEqual(lhs: string, rhs: string): boolean {
@@ -94,7 +95,7 @@ class Router {
     route.render();
   }
 
-  public go(pathname: string) {
+  public go(pathname: Routes) {
     this.history.pushState({}, "", pathname);
 
     this._onRoute(pathname);

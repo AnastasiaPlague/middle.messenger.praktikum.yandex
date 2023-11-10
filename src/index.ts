@@ -1,6 +1,3 @@
-import "./index.scss";
-import "./styles.scss";
-
 import Router from "utils/Router";
 import {
   ChangeProfile,
@@ -12,17 +9,11 @@ import {
   Error404Page,
   Error500Page,
 } from "./pages";
+import AuthController from "controllers";
+import { Routes } from "const";
 
-enum Routes {
-  Index = "/",
-  Register = "/sign-up",
-  Chats = "/chats",
-  Profile = "/profile",
-  ChangeProfile = "/change-profile",
-  ChangePassword = "/change-password",
-  Error404 = "/404",
-  Error500 = "/500",
-}
+import "./index.scss";
+import "./styles.scss";
 
 window.addEventListener("DOMContentLoaded", async () => {
   Router.use(Routes.Index, Main)
@@ -44,7 +35,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    // await AuthController.fetchUser();
+    await AuthController.fetchUser();
 
     Router.start();
 

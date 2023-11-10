@@ -78,3 +78,14 @@ export const VALIDATOR_ERRORS: Record<string, string> = {
   newPassword:
     "Должен содержать заглавную букву или цифру, от 8 до 40 символов",
 };
+
+export enum Routes {
+  Index = "/",
+  Register = "/sign-up",
+  Chats = "/chats",
+  Profile = "/profile",
+  ChangeProfile = "/change-profile",
+  ChangePassword = "/change-password",
+  Error404 = "/404",
+  Error500 = "/500",
+}
