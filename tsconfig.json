@@ -23,7 +23,8 @@
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"],
       "const/*": ["src/const/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "hocs/*": ["src/hocs/*"]
     }
   },
   "include": ["src"]

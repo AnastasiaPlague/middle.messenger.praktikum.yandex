@@ -1,15 +1,15 @@
 import { Block } from "utils";
 import { Link } from "components";
 
-import css from "./errorPage.module.scss";
+import css from "./error.module.scss";
 
-type ErrorPageProps = {
+type ErrorProps = {
   errorCode: string;
   text: string;
 };
 
-export class ErrorPage extends Block {
-  constructor(props: ErrorPageProps) {
+export class Error extends Block {
+  constructor(props: ErrorProps) {
     super(props);
   }
 

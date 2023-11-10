@@ -9,6 +9,7 @@ export default defineConfig({
       pages: path.resolve(__dirname, "./src/pages"),
       const: path.resolve(__dirname, "./src/const"),
       utils: path.resolve(__dirname, "./src/utils"),
+      hocs: path.resolve(__dirname, "./src/hocs"),
     },
   },
   plugins: [handlebars()],
