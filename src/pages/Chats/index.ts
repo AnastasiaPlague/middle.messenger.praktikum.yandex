@@ -1,18 +1,50 @@
 import { Block } from "utils";
-import { CHAT_MOCK_DATA } from "const";
+import { Button } from "components";
+import ChatsController from "controllers/ChatsController";
+import { State, withStore } from "utils/Store";
 
+import { Chat, NewChatForm } from "./components";
 import css from "./chats.module.scss";
-import { Chat } from "./components";
 
-export class Chats extends Block {
-  constructor() {
-    super({ data: CHAT_MOCK_DATA });
-  }
-
+export class BaseChats extends Block {
   init() {
     this.children = {
       chat: new Chat(),
+      button: new Button({
+        text: "Добавить чат",
+        className: css.chatsAddButton,
+        events: {
+          click: () => this.handleOpenPopup(),
+        },
+      }),
+      newChatForm: new NewChatForm({
+        closePopup: () => this.handleClosePopup(),
+      }),
     };
+  }
+
+  componentDidMount(): void {
+    this.getChats();
+  }
+
+  getChats() {
+    ChatsController.getChats();
+  }
+
+  handleOpenPopup(): void {
+    const popup = document.querySelector("#popup");
+    popup?.classList.add(css.chatsPopupShow);
+
+    popup?.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        this.handleClosePopup();
+      }
+    });
+  }
+
+  handleClosePopup(): void {
+    const popup = document.querySelector("#popup");
+    popup?.classList.remove(css.chatsPopupShow);
   }
 
   render() {
@@ -31,23 +63,21 @@ export class Chats extends Block {
               </form>
             </nav>
             <ul class=${css.chatList}>
-              {{#each data}}
+              {{#each chats}}
                 <li class=${css.chatListItem}> 
-                {{#user}}
                   <div class=${css.chatItem}>
-                    <img src="{{avatar}}" alt="Аватар пользователя {{name}}" width="47" height="47" class=${css.chatItemAvatar}>
+                    <img src="{{avatar}}" alt="Аватар чата {{title}}" width="47" height="47" class=${css.chatItemAvatar}>
                     <div class=${css.chatItemContent}>
                       <div class=${css.chatInfo}>
-                        <div class=${css.chatInfoName}>{{name}}</div>
-                {{/user}}
-                {{#message}}
-                        <div class=${css.chatInfoTime}>{{timestamp}}</div>
+                        <div class=${css.chatInfoName}>{{title}}</div>
+                {{#last_message}}
+                        <div class=${css.chatInfoTime}>{{time}}</div>
                       </div>
                       <div class=${css.chatInfo}>
                         <div class=${css.chatInfoRecentMessage}>{{content}}</div>
-                {{/message}}
-                        {{#if unreadMessages}}
-                          <span class=${css.chatInfoUnreadMessage}>{{unreadMessages}}</span>
+                {{/last_message}}
+                        {{#if unreadCount}}
+                          <span class=${css.chatInfoUnreadMessage}>{{unreadCount}}</span>
                         {{/if}}
                         </div>
                     </div>
@@ -56,11 +86,21 @@ export class Chats extends Block {
               {{/each}}
             </ul>
           </div>
+          {{{button}}}
         </div>
        {{{chat}}}
+       <div id="popup" class="${css.chatsPopup}">
+        {{{newChatForm}}}
+       </div>
       </div>
     `,
       this.props,
     );
   }
 }
+
+function mapStateToProps(state: State) {
+  return { chats: state.chats };
+}
+
+export const Chats = withStore(mapStateToProps)(BaseChats);

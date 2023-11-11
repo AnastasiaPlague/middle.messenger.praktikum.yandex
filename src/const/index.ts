@@ -66,6 +66,7 @@ export const VALIDATORS: { [key: string]: ValidatorType } = {
   password: ([value]) => passwordRegexp.test(value),
   newPassword: ([value]) => passwordRegexp.test(value),
   message: ([value]) => !!value,
+  title: ([value]) => !!value,
 };
 
 export const VALIDATOR_ERRORS: Record<string, string> = {
@@ -77,6 +78,7 @@ export const VALIDATOR_ERRORS: Record<string, string> = {
   password: "Должен содержать заглавную букву или цифру, от 8 до 40 символов",
   newPassword:
     "Должен содержать заглавную букву или цифру, от 8 до 40 символов",
+  title: "Введите название",
 };
 
 export enum Routes {

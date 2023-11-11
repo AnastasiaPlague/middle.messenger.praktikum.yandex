@@ -1,6 +1,8 @@
 import { Block } from "utils";
 import { Button, Form, Link } from "components";
 import { USER_MOCK_DATA } from "const";
+import UserController from "controllers/UserController";
+import { UserPassword } from "api/UserApi";
 
 import css from "./changePassword.module.scss";
 
@@ -13,6 +15,7 @@ export class ChangePassword extends Block {
     this.children = {
       form: new Form({
         className: css.changePasswordForm,
+        submitData: (data: UserPassword) => UserController.updatePassword(data),
         id: "change_password",
         fields: [
           {

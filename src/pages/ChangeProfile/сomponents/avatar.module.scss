@@ -1,0 +1,39 @@
+.profile {
+  &Avatar {
+    display: grid;
+    align-self: center;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+
+    &Label {
+      display: none;
+      cursor: pointer;
+      grid-area: 1/-1;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 150px;
+      background-color: var(--stone-5);
+
+      &Text {
+        text-align: center;
+        font-size: var(--font-size-3);
+        color: var(--stone-10);
+      }
+    }
+
+    &:hover .profileAvatarLabel {
+      display: flex;
+    }
+
+    &Img {
+      grid-area: 1/-1;
+      object-fit: cover;
+    }
+
+    &Input {
+      display: none;
+    }
+  }
+}

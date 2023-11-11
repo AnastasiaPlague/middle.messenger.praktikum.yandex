@@ -35,7 +35,7 @@ export class Input extends Block {
     return this.compile(
       `<div {{#if className}} class="{{className}}" {{/if}} >
       {{#if label}}<label class=${css.label} for="{{id}}">{{label}}</label>{{/if}}
-      <input class=${css.input} type="{{type}}" name="{{name}}" id="{{id}}" placeholder="{{placeholder}}" {{#if value}} value="{{value}}" {{/if}} autocomplete="{{autocomplete}}"/>
+      <input class=${css.input} type="{{type}}" name="{{name}}" id="{{id}}" placeholder="{{placeholder}}" {{#if value}} value="{{value}}" {{/if}} autocomplete="{{autocomplete}}" {{#if maxLength}} maxlength="{{maxLength}}" {{/if}}/>
       {{#if errorMessage}}<span class=${css.error}>{{errorMessage}}</span>{{/if}}
       </div>
     `,

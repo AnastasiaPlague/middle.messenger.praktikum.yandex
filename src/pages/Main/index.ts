@@ -2,6 +2,8 @@ import { Block } from "utils";
 import { Button, Form, Link } from "components";
 
 import css from "./main.module.scss";
+import AuthController from "controllers/AuthController";
+import { SignInData } from "api/AuthApi";
 
 export class Main extends Block {
   constructor() {
@@ -13,6 +15,7 @@ export class Main extends Block {
       form: new Form({
         className: css.loginForm,
         id: "signin",
+        submitData: (data: SignInData) => AuthController.signin(data),
         fields: [
           {
             label: "Логин",

@@ -2,9 +2,11 @@ import { User } from "api/AuthApi";
 import { EventBus } from "./EventBus";
 import { Block } from "./Block";
 import { set } from "./set";
+import { ChatsType } from "api/ChatsApi";
 
 export interface State {
   user?: User;
+  chats?: ChatsType;
 }
 
 enum StorageEvent {

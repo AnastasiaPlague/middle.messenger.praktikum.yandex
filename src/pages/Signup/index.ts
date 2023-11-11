@@ -1,6 +1,8 @@
 import { Block } from "utils";
 import { Button, Form, Link } from "components";
 import css from "./signup.module.scss";
+import AuthController from "controllers/AuthController";
+import { SignUpData } from "api/AuthApi";
 
 export class Signup extends Block {
   constructor() {
@@ -12,6 +14,7 @@ export class Signup extends Block {
       form: new Form({
         className: css.signupForm,
         id: "signup",
+        submitData: (data: SignUpData) => AuthController.signup(data),
         fields: [
           {
             label: "Почта",

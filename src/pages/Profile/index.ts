@@ -1,15 +1,12 @@
 import { Block } from "utils";
+import { State, withStore } from "utils/Store";
+import AuthController from "controllers/AuthController";
 
-import { Link } from "components";
-import { USER_MOCK_DATA } from "const";
+import { Button, Link } from "components";
 
 import css from "./profile.module.scss";
 
-export class Profile extends Block {
-  constructor() {
-    super({ userData: USER_MOCK_DATA });
-  }
-
+export class BaseProfile extends Block {
   init() {
     this.children = {
       linkChangeProfile: new Link({
@@ -27,9 +24,11 @@ export class Profile extends Block {
         href: "/chats",
         className: css.profileControlsLink,
       }),
-      linkLogout: new Link({
+      linkLogout: new Button({
         text: "Выйти",
-        href: "/",
+        events: {
+          click: () => AuthController.logout(),
+        },
         className: css.profileControlsDanger,
       }),
     };
@@ -40,9 +39,9 @@ export class Profile extends Block {
       `
       <div class="${css.container} container">
         <div class=${css.profileContainer}>
-          {{#with userData}}
+          {{#with user}}
             <div class=${css.profileAvatar}>
-              <img class=${css.profileAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+              <img class=${css.profileAvatarImg} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
             </div>
             <p class=${css.profileName}>{{display_name}}</p>
             <div class=${css.profileFields}>
@@ -77,7 +76,9 @@ export class Profile extends Block {
             {{{linkChangeProfile}}}
             {{{linkChangePassword}}}
             {{{linkChats}}}
-            {{{linkLogout}}}
+            <div class=${css.profileControlsLogout}>
+              {{{linkLogout}}}
+            </div>
           </div>
         </div>
       </div>
@@ -86,3 +87,9 @@ export class Profile extends Block {
     );
   }
 }
+
+function mapStateToProps(state: State) {
+  return { user: state.user };
+}
+
+export const Profile = withStore(mapStateToProps)(BaseProfile);

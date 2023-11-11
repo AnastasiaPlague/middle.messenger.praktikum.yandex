@@ -29,7 +29,8 @@ export class Form extends Block {
     ) as HTMLInputElement[];
 
     const formData = Object.fromEntries(new FormData(form));
-    console.log(form.name, formData);
+
+    const validated = [];
 
     for (const element of formElements) {
       const { name, value } = element;
@@ -41,11 +42,16 @@ export class Form extends Block {
 
         const errorMessage = validate(name, value);
 
+        validated.push(Boolean(errorMessage));
+
         currentField?.setProps({
           errorMessage,
           value,
         });
       }
+    }
+    if (!validated.filter(Boolean).length) {
+      this.props?.submitData?.(formData);
     }
   }
 

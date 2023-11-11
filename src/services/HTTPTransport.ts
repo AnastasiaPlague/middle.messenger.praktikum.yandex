@@ -99,18 +99,26 @@ export class HTTPTransport {
       const { method, data, headers, timeout } = options;
       const xhr = new XMLHttpRequest();
 
-      xhr.open(method, this.endpoint + url + (data ?? ""));
+      xhr.open(method, this.endpoint + url);
 
       if (headers) {
         for (const [header, value] of Object.entries(headers)) {
           xhr.setRequestHeader(header, value);
         }
       }
-      xhr.setRequestHeader("Content-Type", "application/json");
 
       xhr.withCredentials = true;
       xhr.responseType = "json";
 
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
+        }
+      };
       xhr.onload = function () {
         resolve(xhr.response);
       };
@@ -125,8 +133,11 @@ export class HTTPTransport {
 
       if (method === METHOD.GET || !data) {
         xhr.send();
-      } else {
+      } else if (data instanceof FormData) {
         xhr.send(data);
+      } else {
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(data));
       }
     });
   }
