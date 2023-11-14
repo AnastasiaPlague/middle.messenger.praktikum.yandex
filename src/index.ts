@@ -11,9 +11,55 @@ import {
 } from "./pages";
 import AuthController from "controllers";
 import { Routes } from "const";
+import Handlebars, { HelperOptions } from "handlebars";
 
 import "./index.scss";
 import "./styles.scss";
+
+Handlebars.registerHelper(
+  "compare",
+  (lvalue, rvalue, options: HelperOptions) => {
+    const operator = options.hash.operator || "===";
+
+    const operators: Record<string, (l: string, r: string) => boolean> = {
+      "===": function (l, r) {
+        return l === r;
+      },
+
+      "!==": function (l, r) {
+        return l !== r;
+      },
+    };
+
+    if (!operators[operator]) {
+      throw new Error(
+        "Handlerbars Helper 'compare' doesn't know the operator " + operator,
+      );
+    }
+
+    const result = operators[operator](lvalue, rvalue);
+
+    if (result) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  },
+);
+Handlebars.registerHelper("formatHH:MM", (value) => {
+  const date = new Date(value);
+  return new Intl.DateTimeFormat("ru-RU", {
+    timeStyle: "short",
+  }).format(date);
+});
+
+Handlebars.registerHelper("formatDD:HH:MM", (value) => {
+  const date = new Date(value);
+  return new Intl.DateTimeFormat("ru-RU", {
+    timeStyle: "short",
+    dateStyle: "short",
+  }).format(date);
+});
 
 window.addEventListener("DOMContentLoaded", async () => {
   Router.use(Routes.Index, Main)

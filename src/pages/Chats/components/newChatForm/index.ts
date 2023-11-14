@@ -33,6 +33,8 @@ export class NewChatForm extends Block {
   async handleSubmit(data: NewChat) {
     try {
       await ChatsController.addChat(data);
+      const input = document.getElementById("title") as HTMLInputElement;
+      input.value = "";
       this.props.closePopup();
     } catch (error) {
       console.log(error);

@@ -26,4 +26,8 @@ export class ChatsAPI extends API {
   addChat(data: NewChat): Promise<void> {
     return this.http.post("", { data });
   }
+
+  getChatToken(id: number): Promise<{ token: string }> {
+    return this.http.post(`/token/${id}`);
+  }
 }

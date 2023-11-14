@@ -41,7 +41,6 @@ export class Form extends Block {
         );
 
         const errorMessage = validate(name, value);
-
         validated.push(Boolean(errorMessage));
 
         currentField?.setProps({
@@ -50,6 +49,7 @@ export class Form extends Block {
         });
       }
     }
+
     if (!validated.filter(Boolean).length) {
       this.props?.submitData?.(formData);
     }
@@ -57,7 +57,7 @@ export class Form extends Block {
 
   render() {
     return this.compile(
-      `<form  {{#if className}} class="{{className}}" {{/if}} {{#if id}} id="{{id}}" name="{{id}}" {{/if}} novalidate  >
+      `<form {{#if className}} class="{{className}}" {{/if}} {{#if id}} id="{{id}}" name="{{id}}" {{/if}} novalidate  >
       {{#each fields}}
         {{{this}}}
       {{/each}}

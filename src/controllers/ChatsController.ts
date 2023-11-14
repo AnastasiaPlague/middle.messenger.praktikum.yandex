@@ -1,8 +1,6 @@
-// import { AuthAPI, SignInData, SignUpData } from "api/AuthApi";
 import { ChatsAPI, NewChat } from "api/ChatsApi";
-// import { Routes } from "const";
-// import Router from "utils/Router";
 import store from "utils/Store";
+import MessagesController from "./MessagesController";
 
 class ChatsController {
   private api = new ChatsAPI();
@@ -10,7 +8,11 @@ class ChatsController {
   async getChats() {
     try {
       const chats = await this.api.getChats();
-
+      chats.forEach((chat) => {
+        if (chat.id) {
+          MessagesController.connect(chat.id);
+        }
+      });
       store.set("chats", chats);
     } catch (error) {
       console.log(error);
@@ -21,6 +23,15 @@ class ChatsController {
     await this.api.addChat(data);
 
     this.getChats();
+  }
+
+  async getChatToken(id: number): Promise<{ token: string }> {
+    try {
+      return await this.api.getChatToken(id);
+    } catch (error) {
+      console.log(error);
+    }
+    return { token: "" };
   }
 }
 

@@ -1,16 +1,12 @@
 import { Block } from "utils";
 import { Button, Form, Link } from "components";
-import { USER_MOCK_DATA } from "const";
 import UserController from "controllers/UserController";
 import { UserPassword } from "api/UserApi";
 
 import css from "./changePassword.module.scss";
+import { State, withStore } from "utils/Store";
 
-export class ChangePassword extends Block {
-  constructor() {
-    super({ userData: USER_MOCK_DATA });
-  }
-
+export class BaseChangePassword extends Block {
   init() {
     this.children = {
       form: new Form({
@@ -59,9 +55,9 @@ export class ChangePassword extends Block {
       `
       <div class="${css.container} container">
         <div class=${css.changePasswordContainer}>
-          {{#with userData}}
+          {{#with user}}
             <div class=${css.changePasswordAvatar}>
-              <img class=${css.changePasswordAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+              <img class=${css.changePasswordAvatarImg} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
             </div>  
           {{/with}}
             {{{form}}}
@@ -77,3 +73,9 @@ export class ChangePassword extends Block {
     );
   }
 }
+
+function mapStateToProps(state: State) {
+  return { user: state.user };
+}
+
+export const ChangePassword = withStore(mapStateToProps)(BaseChangePassword);

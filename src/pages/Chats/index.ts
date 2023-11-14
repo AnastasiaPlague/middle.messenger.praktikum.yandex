@@ -3,13 +3,14 @@ import { Button } from "components";
 import ChatsController from "controllers/ChatsController";
 import { State, withStore } from "utils/Store";
 
-import { Chat, NewChatForm } from "./components";
+import { Chat, NewChatForm, ChatsList } from "./components";
 import css from "./chats.module.scss";
 
 export class BaseChats extends Block {
   init() {
     this.children = {
-      chat: new Chat(),
+      chat: new Chat({}),
+      chatsList: new ChatsList({}),
       button: new Button({
         text: "Добавить чат",
         className: css.chatsAddButton,
@@ -62,33 +63,15 @@ export class BaseChats extends Block {
                 </div>
               </form>
             </nav>
-            <ul class=${css.chatList}>
-              {{#each chats}}
-                <li class=${css.chatListItem}> 
-                  <div class=${css.chatItem}>
-                    <img src="{{avatar}}" alt="Аватар чата {{title}}" width="47" height="47" class=${css.chatItemAvatar}>
-                    <div class=${css.chatItemContent}>
-                      <div class=${css.chatInfo}>
-                        <div class=${css.chatInfoName}>{{title}}</div>
-                {{#last_message}}
-                        <div class=${css.chatInfoTime}>{{time}}</div>
-                      </div>
-                      <div class=${css.chatInfo}>
-                        <div class=${css.chatInfoRecentMessage}>{{content}}</div>
-                {{/last_message}}
-                        {{#if unreadCount}}
-                          <span class=${css.chatInfoUnreadMessage}>{{unreadCount}}</span>
-                        {{/if}}
-                        </div>
-                    </div>
-                  </div>
-                </li>
-              {{/each}}
-            </ul>
+            {{{chatsList}}} 
           </div>
           {{{button}}}
         </div>
-       {{{chat}}}
+          {{#if activeChat}} 
+            {{{chat}}}
+          {{else}}
+            <p class=${css.emptyChat}>Выберите или создайте чат</p>
+          {{/if}}
        <div id="popup" class="${css.chatsPopup}">
         {{{newChatForm}}}
        </div>
@@ -100,7 +83,6 @@ export class BaseChats extends Block {
 }
 
 function mapStateToProps(state: State) {
-  return { chats: state.chats };
+  return { chats: state.chats, activeChat: state.activeChat ?? null };
 }
-
 export const Chats = withStore(mapStateToProps)(BaseChats);

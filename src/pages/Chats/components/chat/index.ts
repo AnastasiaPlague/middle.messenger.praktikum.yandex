@@ -1,18 +1,16 @@
 import { Block } from "utils";
-import { CHAT_MOCK_DATA } from "const";
 import { Form } from "components";
+import { State, withStore } from "utils/Store";
+import MessagesController from "controllers/MessagesController";
 
 import css from "./chat.module.scss";
 
-export class Chat extends Block {
-  constructor() {
-    super({ data: CHAT_MOCK_DATA });
-  }
-
+class BaseChat extends Block {
   init() {
     this.children = {
       form: new Form({
         className: css.formWrapper,
+        submitData: this.handleSubmit.bind(this),
         id: "chat",
         fields: [
           {
@@ -22,19 +20,36 @@ export class Chat extends Block {
             id: "message",
             className: css.chatInput,
             optional: true,
+            autocomplete: "off",
           },
         ],
       }),
     };
   }
 
+  protected componentDidUpdate(oldProps: any, newProps: any): boolean {
+    if (oldProps.activeChat !== newProps.activeChat) {
+      MessagesController.getMessages(this.props.activeChat);
+    }
+    return true;
+  }
+
+  handleSubmit(message: { message: string }) {
+    MessagesController.send(this.props.activeChat, message);
+    const input = document.getElementById("message") as HTMLInputElement;
+    input.value = "";
+  }
+
   render() {
+    const { id } = this.props.user;
+
     return this.compile(
       `
       <div class=${css.chatWrapper}>
-        <header class=${css.chatNav}>
-          <img class=${css.chatNavAvatar} src='' width="37" height="37" alt='Аватар'>
-          <p class=${css.chatNavUsername}>Michael Scott</p>
+      {{#with chat}} 
+       <header class=${css.chatNav}>
+          <img class=${css.chatNavAvatar} {{#if avatar}} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" {{/if}}  width="37" height="37" alt='Аватар'>
+          <p class=${css.chatNavUsername}>{{title}}</p>
           <button class=${css.chatNavActionsButton} aria-label="Управление чатом">
             <svg xmlns="http://www.w3.org/2000/svg" class=${css.chatNavActionsIcon} focusable="false" aria-hidden="true" width="3" height="16" viewBox="0 0 3 16" fill="none">
               <circle cx="1.5" cy="2" r="1.5" fill="currentColor"/>
@@ -43,6 +58,15 @@ export class Chat extends Block {
             </svg>
           </button>
         </header>
+        {{/with}}
+       <div class=${css.messagesContainer}>  
+       {{#each messages}}
+          <div class="${css.messagesContent} {{#compare user_id ${id} operator="==="}}${css.messagesYours}{{/compare}}">
+          <div>{{content}}</div>
+          <span class=${css.messagesTime}>{{formatHH:MM time}}</span>
+          </div>
+        {{/each}}
+        </div>
         <div class=${css.form}>
           <button type="button" class=${css.formActionsButton} aria-label="Отправить сообщение">
           <svg xmlns="http://www.w3.org/2000/svg" class=${css.formActionsIcon}   focusable="false" aria-hidden="true" viewBox="0 0 30 30" fill="none">
@@ -56,10 +80,25 @@ export class Chat extends Block {
           </svg></button>
           {{{form}}}
           <button class=${css.formSendButton} form="chat" aria-label="Отправить сообщение"><svg xmlns="http://www.w3.org/2000/svg" class=${css.formSendIcon} height="1em" focusable="false" aria-hidden="true" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></button>
-        </div>
-      
+        </div>  
     `,
       this.props,
     );
   }
 }
+
+function mapStateToProps(state: State) {
+  return {
+    chat: state.chats?.find((item) => item.id === state.activeChat),
+    user: state.user,
+    activeChat: state.activeChat ?? null,
+    messages: () => {
+      if (state.activeChat) {
+        return state.messages[state.activeChat];
+      }
+      return [];
+    },
+  };
+}
+
+export const Chat = withStore(mapStateToProps)(BaseChat);
