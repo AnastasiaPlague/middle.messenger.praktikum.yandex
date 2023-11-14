@@ -13,15 +13,12 @@ export class MessagesApi {
     this.url = url;
   }
 
-  get getSocket() {
-    return this.socket;
-  }
-
   public connect() {
     this.socket = new WebSocket(this.url);
   }
 
   public close() {
+    console.log("i should close");
     if (this.socket) {
       this.socket.close();
       this.socket = null;

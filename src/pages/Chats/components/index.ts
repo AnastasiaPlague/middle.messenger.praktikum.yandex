@@ -1,3 +1,4 @@
 export * from "./chat";
-export * from "./newChatForm";
+export * from "./forms";
 export * from "./chatList";
+export * from "./header";

@@ -3,6 +3,7 @@ import { Button, Form, Link } from "components";
 import css from "./signup.module.scss";
 import AuthController from "controllers/AuthController";
 import { SignUpData } from "api/AuthApi";
+import { Routes } from "const";
 
 export class Signup extends Block {
   constructor() {
@@ -73,7 +74,7 @@ export class Signup extends Block {
       signupButton: new Button({ text: "Создать аккаунт", formId: "signup" }),
       linkSignin: new Link({
         text: "Войти",
-        href: "/",
+        href: Routes.Index,
         className: css.signupLink,
       }),
     };

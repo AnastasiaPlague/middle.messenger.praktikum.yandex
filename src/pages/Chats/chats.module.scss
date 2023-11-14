@@ -41,25 +41,18 @@
     background-color: #2424248c;
     backdrop-filter: blur(5px);
     z-index: 10;
-
-    &Show {
-      display: grid;
-      height: 100%;
-      place-items: center;
-    }
   }
+}
+
+:global(.popupShow) {
+  display: grid;
+  height: 100%;
+  place-items: center;
 }
 
 .profile {
   &Link {
     align-self: flex-end;
-  }
-
-  &Icon {
-    display: inline-block;
-    margin-inline-start: var(--size-2);
-    vertical-align: middle;
-    fill: currentcolor;
   }
 }
 

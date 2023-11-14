@@ -4,6 +4,7 @@ import { Button, Form, Link } from "components";
 import css from "./main.module.scss";
 import AuthController from "controllers/AuthController";
 import { SignInData } from "api/AuthApi";
+import { Routes } from "const";
 
 export class Main extends Block {
   constructor() {
@@ -36,7 +37,7 @@ export class Main extends Block {
       loginButton: new Button({ text: "Войти", formId: "signin" }),
       linkAuth: new Link({
         text: "Нет аккаунта?",
-        href: "/sign-up",
+        href: Routes.Register,
         className: css.loginLink,
       }),
     };

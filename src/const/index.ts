@@ -37,8 +37,8 @@ export const VALIDATOR_ERRORS: Record<string, string> = {
 export enum Routes {
   Index = "/",
   Register = "/sign-up",
-  Chats = "/chats",
-  Profile = "/profile",
+  Chats = "/messenger",
+  Profile = "/settings",
   ChangeProfile = "/change-profile",
   ChangePassword = "/change-password",
   Error404 = "/404",

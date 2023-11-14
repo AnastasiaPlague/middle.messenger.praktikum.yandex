@@ -14,6 +14,8 @@ export type ChatType = {
 };
 
 export type ChatsType = Array<ChatType>;
+
+type UserActionType = { users: Array<number>; chatId: number };
 export class ChatsAPI extends API {
   constructor() {
     super("/chats");
@@ -27,7 +29,19 @@ export class ChatsAPI extends API {
     return this.http.post("", { data });
   }
 
+  removeChat(data: { chatId: number }): Promise<void> {
+    return this.http.delete("", { data });
+  }
+
   getChatToken(id: number): Promise<{ token: string }> {
     return this.http.post(`/token/${id}`);
+  }
+
+  addUserToChat(data: UserActionType) {
+    return this.http.put("/users", { data });
+  }
+
+  removeUserFromChat(data: UserActionType) {
+    return this.http.delete("/users", { data });
   }
 }

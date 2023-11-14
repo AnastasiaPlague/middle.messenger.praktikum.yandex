@@ -6,6 +6,7 @@ import css from "./changeProfile.module.scss";
 import { UserProfile } from "api/UserApi";
 import UserController from "controllers/UserController";
 import { Avatar } from "./сomponents";
+import { Routes } from "const";
 
 export class BaseChangeProfile extends Block {
   init() {
@@ -74,7 +75,7 @@ export class BaseChangeProfile extends Block {
       }),
       linkProfile: new Link({
         text: "Назад",
-        href: "/profile",
+        href: Routes.Profile,
       }),
     };
   }

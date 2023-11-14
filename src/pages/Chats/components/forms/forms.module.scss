@@ -3,10 +3,12 @@
     --container-max: 400px;
     background-color: #242424;
   }
+
   &Button {
     margin-block-start: var(--size-4);
     width: 100%;
   }
+
   &Fields {
     margin-block-start: var(--size-6);
   }

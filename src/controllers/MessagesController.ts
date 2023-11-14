@@ -7,9 +7,10 @@ export class MessagesController {
   heartbeats: Record<number, number | undefined> = {};
 
   public async connect(chatId: number) {
-    if (this.sockets[chatId]) {
+    if (this.sockets[chatId] || !chatId) {
       return;
     }
+
     const { token } = await ChatsController.getChatToken(chatId);
     const userId = store.getState().user?.id;
     const ws = new MessagesApi(
@@ -23,11 +24,11 @@ export class MessagesController {
       ws.send({ type: "ping" });
     }, 8000);
 
-    ws.getSocket?.addEventListener("message", (message: MessageEvent) =>
+    ws.socket?.addEventListener("message", (message: MessageEvent) =>
       this.onMessage(message, chatId),
     );
 
-    ws.getSocket?.addEventListener("close", () => this.onClose(chatId));
+    ws.socket?.addEventListener("close", () => this.onClose(chatId));
   }
 
   public async send(chatId: number, { message }: { message: string }) {
@@ -43,7 +44,6 @@ export class MessagesController {
       }
     } catch (e) {
       console.log(e);
-      throw new Error("Couldn't connect");
     }
   }
 
@@ -58,7 +58,7 @@ export class MessagesController {
         content: "0",
       });
     } catch (e) {
-      throw new Error("Couldn't connect");
+      console.log(e);
     }
   }
 
@@ -67,19 +67,25 @@ export class MessagesController {
     const previousMessages = store.getState().messages;
 
     if (received.type === "message") {
-      store.set(`messages.${chatId}`, [...previousMessages[chatId], received]);
-      // как обновлять латест месадж в списке чатов?
+      store.set(`messages.${chatId}`, [
+        ...(previousMessages[chatId] || []),
+        received,
+      ]);
     } else if (Array.isArray(received)) {
       store.set(`messages.${chatId}`, [...received.reverse()]);
     }
   }
 
+  closeById(id: number) {
+    this.sockets[id]?.close();
+  }
+
   onClose(id: number) {
-    this.sockets[id] = null;
+    delete this.sockets[id];
     if (this.heartbeats[id]) {
       clearInterval(this.heartbeats[id]);
     }
-    this.heartbeats[id] = undefined;
+    delete this.heartbeats[id];
   }
 
   closeAll() {

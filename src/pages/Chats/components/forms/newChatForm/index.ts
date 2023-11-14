@@ -1,9 +1,9 @@
 import { Block } from "utils";
 import { Button, Form } from "components";
-
-import css from "./newChatForm.module.scss";
 import { NewChat } from "api/ChatsApi";
 import ChatsController from "controllers/ChatsController";
+
+import css from "../forms.module.scss";
 
 export class NewChatForm extends Block {
   init() {

@@ -24,4 +24,8 @@ export class UserAPI extends API {
   updateAvatar(data: FormData): Promise<User> {
     return this.http.put("/profile/avatar", { data });
   }
+
+  searchUser(data: { login: string }): Promise<User[]> {
+    return this.http.post("/search", { data });
+  }
 }

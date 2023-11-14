@@ -4,10 +4,12 @@ import { State, withStore } from "utils/Store";
 import MessagesController from "controllers/MessagesController";
 
 import css from "./chat.module.scss";
+import { Header } from "..";
 
 class BaseChat extends Block {
   init() {
     this.children = {
+      header: new Header({}),
       form: new Form({
         className: css.formWrapper,
         submitData: this.handleSubmit.bind(this),
@@ -41,28 +43,14 @@ class BaseChat extends Block {
   }
 
   render() {
-    const { id } = this.props.user;
-
     return this.compile(
       `
       <div class=${css.chatWrapper}>
-      {{#with chat}} 
-       <header class=${css.chatNav}>
-          <img class=${css.chatNavAvatar} {{#if avatar}} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" {{/if}}  width="37" height="37" alt='Аватар'>
-          <p class=${css.chatNavUsername}>{{title}}</p>
-          <button class=${css.chatNavActionsButton} aria-label="Управление чатом">
-            <svg xmlns="http://www.w3.org/2000/svg" class=${css.chatNavActionsIcon} focusable="false" aria-hidden="true" width="3" height="16" viewBox="0 0 3 16" fill="none">
-              <circle cx="1.5" cy="2" r="1.5" fill="currentColor"/>
-              <circle cx="1.5" cy="8" r="1.5" fill="currentColor"/>
-              <circle cx="1.5" cy="14" r="1.5" fill="currentColor"/>
-            </svg>
-          </button>
-        </header>
-        {{/with}}
+      {{{header}}}
        <div class=${css.messagesContainer}>  
        {{#each messages}}
-          <div class="${css.messagesContent} {{#compare user_id ${id} operator="==="}}${css.messagesYours}{{/compare}}">
-          <div>{{content}}</div>
+          <div class="${css.messagesContent} {{#compare user_id ${this.props.user?.id} operator="==="}}${css.messagesYours}{{/compare}}">
+          <span>{{content}}</span>
           <span class=${css.messagesTime}>{{formatHH:MM time}}</span>
           </div>
         {{/each}}

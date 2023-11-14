@@ -5,23 +5,24 @@ import AuthController from "controllers/AuthController";
 import { Button, Link } from "components";
 
 import css from "./profile.module.scss";
+import { Routes } from "const";
 
 export class BaseProfile extends Block {
   init() {
     this.children = {
       linkChangeProfile: new Link({
         text: "Изменить данные",
-        href: "/change-profile",
+        href: Routes.ChangeProfile,
         className: css.profileControlsLink,
       }),
       linkChangePassword: new Link({
         text: "Изменить пароль",
-        href: "/change-password",
+        href: Routes.ChangePassword,
         className: css.profileControlsLink,
       }),
       linkChats: new Link({
         text: "Назад к чатам",
-        href: "/chats",
+        href: Routes.Chats,
         className: css.profileControlsLink,
       }),
       linkLogout: new Button({

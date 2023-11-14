@@ -1,25 +1,43 @@
 import { Block } from "utils";
-import { Button } from "components";
+import { Button, Link } from "components";
 import ChatsController from "controllers/ChatsController";
 import { State, withStore } from "utils/Store";
 
-import { Chat, NewChatForm, ChatsList } from "./components";
+import {
+  Chat,
+  ChatsList,
+  NewChatForm,
+  AddUserForm,
+  RemoveUserForm,
+} from "./components";
 import css from "./chats.module.scss";
+import { Routes } from "const";
 
 export class BaseChats extends Block {
   init() {
     this.children = {
       chat: new Chat({}),
       chatsList: new ChatsList({}),
+      profileLink: new Link({
+        text: "Профиль >",
+        href: Routes.Profile,
+        className: css.profileLink,
+      }),
       button: new Button({
         text: "Добавить чат",
         className: css.chatsAddButton,
         events: {
-          click: () => this.handleOpenPopup(),
+          click: () => this.handleOpenPopup("#new-chat-popup"),
         },
       }),
       newChatForm: new NewChatForm({
-        closePopup: () => this.handleClosePopup(),
+        closePopup: () => this.handleClosePopup("#new-chat-popup"),
+      }),
+      addUserForm: new AddUserForm({
+        closePopup: () => this.handleClosePopup("#add-user-popup"),
+      }),
+      removeUserForm: new RemoveUserForm({
+        closePopup: () => this.handleClosePopup("#remove-user-popup"),
       }),
     };
   }
@@ -32,20 +50,20 @@ export class BaseChats extends Block {
     ChatsController.getChats();
   }
 
-  handleOpenPopup(): void {
-    const popup = document.querySelector("#popup");
-    popup?.classList.add(css.chatsPopupShow);
+  handleOpenPopup(selector: string): void {
+    const popup = document.querySelector(selector);
+    popup?.classList.add("popupShow");
 
     popup?.addEventListener("click", (e) => {
       if (e.target === popup) {
-        this.handleClosePopup();
+        this.handleClosePopup(selector);
       }
     });
   }
 
-  handleClosePopup(): void {
-    const popup = document.querySelector("#popup");
-    popup?.classList.remove(css.chatsPopupShow);
+  handleClosePopup(selector: string): void {
+    const popup = document.querySelector(selector);
+    popup?.classList.remove("popupShow");
   }
 
   render() {
@@ -55,7 +73,7 @@ export class BaseChats extends Block {
         <div class=${css.chatsContainer}>
           <div class=${css.chatsInnerContainer}>
             <nav class=${css.chatsNav}>
-              <a class=${css.profileLink} href="/profile">Профиль <svg xmlns="http://www.w3.org/2000/svg" class=${css.profileIcon} height="1em" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></a>
+             {{{profileLink}}}
               <form class=${css.search}>
                 <input class=${css.searchInput} name="search" type="search" placeholder="Поиск"/>
                 <div class=${css.searchIconContainer}>
@@ -72,8 +90,14 @@ export class BaseChats extends Block {
           {{else}}
             <p class=${css.emptyChat}>Выберите или создайте чат</p>
           {{/if}}
-       <div id="popup" class="${css.chatsPopup}">
+       <div id="new-chat-popup" class="${css.chatsPopup}">
         {{{newChatForm}}}
+       </div>
+       <div id="add-user-popup" class="${css.chatsPopup}">
+        {{{addUserForm}}}
+       </div>
+        <div id="remove-user-popup" class="${css.chatsPopup}">
+        {{{removeUserForm}}}
        </div>
       </div>
     `,

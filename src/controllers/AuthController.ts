@@ -12,7 +12,7 @@ class AuthController {
 
       await this.fetchUser();
 
-      Router.go(Routes.Profile);
+      Router.go(Routes.Chats);
     } catch (error) {
       console.log(error);
     }

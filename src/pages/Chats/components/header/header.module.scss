@@ -1,0 +1,87 @@
+.chatNav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: var(--size-3);
+  padding: var(--size-4) var(--size-2);
+  border-bottom: 2px solid var(--stone-7);
+
+  &Avatar {
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: var(--stone-7);
+    flex-shrink: 0;
+  }
+
+  &Username {
+    font-weight: 500;
+    margin: 0;
+  }
+
+  &ActionsButton {
+    border: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
+
+    padding: var(--size-2) var(--size-4);
+    background-color: transparent;
+    margin-inline-start: auto;
+    color: var(--stone-4);
+    border-radius: 50%;
+
+    & svg {
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: var(--stone-10);
+    }
+  }
+
+  &ActionsPopup {
+    display: none;
+    position: absolute;
+
+    flex-flow: column nowrap;
+    gap: var(--size-4);
+    right: 0;
+    top: calc(100% + 10px);
+    z-index: 10;
+    padding: var(--size-3) var(--size-4);
+    border: 1px solid var(--stone-7);
+    border-radius: 6px;
+    background-color: var(--stone-11);
+    box-shadow: var(--shadow-elevation-low);
+
+    &Show {
+      display: flex;
+    }
+  }
+
+  &ActionsPopupButton {
+    border: 0;
+    background-color: transparent;
+    display: block;
+  }
+
+  &ActionsPopupButtonDanger {
+    color: var(--red-0);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .chatNav {
+    border-color: var(--stone-4);
+  }
+
+  .chatNav {
+    &ActionsButton {
+      color: var(--stone-5);
+    }
+  }
+}

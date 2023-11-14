@@ -5,6 +5,7 @@ import { UserPassword } from "api/UserApi";
 
 import css from "./changePassword.module.scss";
 import { State, withStore } from "utils/Store";
+import { Routes } from "const";
 
 export class BaseChangePassword extends Block {
   init() {
@@ -45,7 +46,7 @@ export class BaseChangePassword extends Block {
       }),
       linkProfile: new Link({
         text: "Назад",
-        href: "/profile",
+        href: Routes.Profile,
       }),
     };
   }

@@ -38,6 +38,17 @@ class UserController {
       console.log(error);
     }
   }
+
+  async searchUser(data: { login: string }) {
+    try {
+      const user = await this.api.searchUser(data);
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // async
 }
 
 export default new UserController();
