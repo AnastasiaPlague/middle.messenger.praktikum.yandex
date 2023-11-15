@@ -1,25 +1,26 @@
 import { Block } from "utils";
 import { Button, Form, Link } from "components";
-import { USER_MOCK_DATA } from "const";
+import { State, withStore } from "utils/Store";
 
 import css from "./changeProfile.module.scss";
+import { UserProfile } from "api/UserApi";
+import UserController from "controllers/UserController";
+import { Avatar } from "./сomponents";
+import { Routes } from "const";
 
-export class ChangeProfile extends Block {
-  constructor() {
-    super("div", { userData: USER_MOCK_DATA });
-  }
-
+export class BaseChangeProfile extends Block {
   init() {
-    this.element!.classList.add("container", css.container);
     this.children = {
+      avatar: new Avatar({}),
       form: new Form({
         className: css.profileForm,
         id: "change_profile",
+        submitData: (data: UserProfile) => UserController.updateProfile(data),
         fields: [
           {
             label: "Почта",
             name: "email",
-            value: USER_MOCK_DATA.email,
+            value: this.props.user.email,
             placeholder: "Введите почту",
             type: "email",
             id: "email",
@@ -28,7 +29,7 @@ export class ChangeProfile extends Block {
           {
             label: "Логин",
             name: "login",
-            value: USER_MOCK_DATA.login,
+            value: this.props.user.login,
             placeholder: "Введите логин",
             type: "text",
             id: "login",
@@ -37,7 +38,7 @@ export class ChangeProfile extends Block {
           {
             label: "Имя",
             name: "first_name",
-            value: USER_MOCK_DATA.first_name,
+            value: this.props.user.first_name,
             placeholder: "Введите имя",
             type: "text",
             id: "first_name",
@@ -45,7 +46,7 @@ export class ChangeProfile extends Block {
           {
             label: "Фамилия",
             name: "second_name",
-            value: USER_MOCK_DATA.second_name,
+            value: this.props.user.second_name,
             placeholder: "Введите фамилию",
             type: "text",
             id: "second_name",
@@ -53,7 +54,7 @@ export class ChangeProfile extends Block {
           {
             label: "Имя в чате",
             name: "display_name",
-            value: USER_MOCK_DATA.display_name,
+            value: this.props.user.display_name,
             placeholder: "Введите имя в чате",
             type: "text",
             id: "display_name",
@@ -61,7 +62,7 @@ export class ChangeProfile extends Block {
           {
             label: "Телефон",
             name: "phone",
-            value: USER_MOCK_DATA.phone,
+            value: this.props.user.phone,
             placeholder: "Введите телефон",
             type: "tel",
             id: "phone",
@@ -74,7 +75,7 @@ export class ChangeProfile extends Block {
       }),
       linkProfile: new Link({
         text: "Назад",
-        href: "/profile",
+        href: Routes.Profile,
       }),
     };
   }
@@ -82,20 +83,14 @@ export class ChangeProfile extends Block {
   render() {
     return this.compile(
       `
-      <div class=${css.profileContainer}>
-        {{#with userData}}
-          <form class=${css.profileAvatar}>
-            <img class=${css.profileAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
-            <label for="avatar" class=${css.profileAvatarLabel}>
-              <p class=${css.profileAvatarLabelText}>Поменять аватар</p>
-            </label>
-            <input type="file" id="avatar" name="avatar" class=${css.profileAvatarInput} />      
-          </form> 
-        {{/with}}
+      <div class="${css.container} container">
+        <div class=${css.profileContainer}>
+          {{{avatar}}}
           {{{form}}}
-          <div class=${css.profileControls}>
-            {{{buttonSave}}}
-            {{{linkProfile}}}
+            <div class=${css.profileControls}>
+              {{{buttonSave}}}
+              {{{linkProfile}}}
+            </div>
           </div>
         </div>
       </div>
@@ -104,3 +99,9 @@ export class ChangeProfile extends Block {
     );
   }
 }
+
+function mapStateToProps(state: State) {
+  return { user: state.user };
+}
+
+export const ChangeProfile = withStore(mapStateToProps)(BaseChangeProfile);

@@ -23,7 +23,11 @@
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"],
       "const/*": ["src/const/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "services/*": ["src/services/*"],
+      "hocs/*": ["src/hocs/*"],
+      "controllers/*": ["src/controllers/*"],
+      "api/*": ["src/api/*"]
     }
   },
   "include": ["src"]

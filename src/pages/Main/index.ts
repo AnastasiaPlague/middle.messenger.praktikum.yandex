@@ -2,18 +2,21 @@ import { Block } from "utils";
 import { Button, Form, Link } from "components";
 
 import css from "./main.module.scss";
+import AuthController from "controllers/AuthController";
+import { SignInData } from "api/AuthApi";
+import { Routes } from "const";
 
 export class Main extends Block {
   constructor() {
-    super("div", {});
+    super({});
   }
 
   init() {
-    this.element!.classList.add("fullscreen-centered");
     this.children = {
       form: new Form({
         className: css.loginForm,
         id: "signin",
+        submitData: (data: SignInData) => AuthController.signin(data),
         fields: [
           {
             label: "Логин",
@@ -34,7 +37,7 @@ export class Main extends Block {
       loginButton: new Button({ text: "Войти", formId: "signin" }),
       linkAuth: new Link({
         text: "Нет аккаунта?",
-        href: "/sign-up",
+        href: Routes.Register,
         className: css.loginLink,
       }),
     };
@@ -43,13 +46,15 @@ export class Main extends Block {
   render() {
     return this.compile(
       `
-      <div class="${css.container} container">
-        <div class="card ${css.loginCard}">
-          <h1 class=${css.loginTitle}>Авторизация</h1>
-          {{{form}}}
-          <div class=${css.loginControls}>
-            {{{loginButton}}}
-            {{{linkAuth}}}
+      <div class="fullscreen-centered">
+        <div class="${css.container} container">
+          <div class="card ${css.loginCard}">
+            <h1 class=${css.loginTitle}>Авторизация</h1>
+            {{{form}}}
+            <div class=${css.loginControls}>
+              {{{loginButton}}}
+              {{{linkAuth}}}
+            </div>
           </div>
         </div>
       </div>

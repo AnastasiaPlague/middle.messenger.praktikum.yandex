@@ -6,7 +6,8 @@
   place-items: stretch;
 
   &Container {
-    overflow-y: auto;
+    position: relative;
+    overflow: hidden auto;
     scrollbar-gutter: stable;
     border-right: 2px solid var(--stone-7);
   }
@@ -20,21 +21,37 @@
     display: flex;
     flex-direction: column;
     min-height: 110px;
+    background-color: #242424;
     top: var(--size-2);
     margin-block-start: var(--size-2);
   }
+
+  &AddButton {
+    position: absolute;
+    bottom: var(--size-4);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &Popup {
+    position: fixed;
+    display: none;
+    width: 100%;
+    background-color: #2424248c;
+    backdrop-filter: blur(5px);
+    z-index: 10;
+  }
+}
+
+:global(.popupShow) {
+  display: grid;
+  height: 100%;
+  place-items: center;
 }
 
 .profile {
   &Link {
     align-self: flex-end;
-  }
-
-  &Icon {
-    display: inline-block;
-    margin-inline-start: var(--size-2);
-    vertical-align: middle;
-    fill: currentcolor;
   }
 }
 
@@ -73,82 +90,8 @@
   }
 }
 
-.chatList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  --_separator-color: var(--stone-7);
-
-  &Item {
-    border-bottom: 1px solid var(--_separator-color);
-  }
-
-  &Item:first-child {
-    border-top: 1px solid var(--_separator-color);
-  }
-}
-
-.chatItem {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--size-3);
-  padding-block: var(--size-2);
-
-  &Avatar {
-    overflow: hidden;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    background-color: var(--stone-7);
-    flex-shrink: 0;
-  }
-
-  &Content {
-    flex-grow: 1;
-
-    /* enable text truncating */
-    min-width: 0;
-  }
-}
-
-.chatInfo {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-
-  &Name {
-    font-weight: 500;
-  }
-
-  &Time {
-    font-size: var(--font-size-0);
-  }
-
-  &RecentMessage {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 13px;
-  }
-
-  &UnreadMessage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--size-5);
-    aspect-ratio: 1/1;
-    flex-shrink: 0;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: var(--purple-10);
-    font-size: var(--font-size-00);
-    font-weight: 500;
-  }
-}
-
-.chatInfo + .chatInfo {
-  margin-block-start: var(--size-2);
+.emptyChat {
+  place-self: center;
 }
 
 @media (prefers-color-scheme: light) {
@@ -163,14 +106,5 @@
     &::placeholder {
       color: var(--stone-6);
     }
-  }
-
-  .chatList {
-    --_separator-color: var(--stone-4);
-  }
-
-  .chatInfoUnreadMessage {
-    color: var(--stone-2);
-    background-color: var(--purple-5);
   }
 }

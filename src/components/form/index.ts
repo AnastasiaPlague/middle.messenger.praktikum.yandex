@@ -4,7 +4,7 @@ import { Block, validate } from "utils";
 
 export class Form extends Block {
   constructor(props: Partial<HTMLFormElement>) {
-    super("form", props);
+    super(props);
   }
 
   protected init() {
@@ -12,12 +12,6 @@ export class Form extends Block {
       (props: InputProps) => new Input(props),
     );
 
-    if (this.props.className) {
-      this.element!.classList.add(this.props.className);
-    }
-    this.element!.setAttribute("id", this.props.id ?? "");
-    this.element!.setAttribute("novalidate", "");
-    this.element!.setAttribute("name", this.props.id ?? "");
     this.setProps({
       events: {
         submit: (e: Event & { target: HTMLFormElement }) =>
@@ -35,7 +29,8 @@ export class Form extends Block {
     ) as HTMLInputElement[];
 
     const formData = Object.fromEntries(new FormData(form));
-    console.log(form.name, formData);
+
+    const validated = [];
 
     for (const element of formElements) {
       const { name, value } = element;
@@ -46,6 +41,7 @@ export class Form extends Block {
         );
 
         const errorMessage = validate(name, value);
+        validated.push(Boolean(errorMessage));
 
         currentField?.setProps({
           errorMessage,
@@ -53,14 +49,19 @@ export class Form extends Block {
         });
       }
     }
+
+    if (!validated.filter(Boolean).length) {
+      this.props?.submitData?.(formData);
+    }
   }
 
   render() {
     return this.compile(
-      `
+      `<form {{#if className}} class="{{className}}" {{/if}} {{#if id}} id="{{id}}" name="{{id}}" {{/if}} novalidate  >
       {{#each fields}}
         {{{this}}}
       {{/each}}
+      </form>
     `,
       this.props,
     );

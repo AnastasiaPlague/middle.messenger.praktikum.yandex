@@ -5,21 +5,20 @@ import css from "./button.module.scss";
 type ButtonProps = Partial<HTMLButtonElement> & {
   text: string;
   formId?: string;
+  events?: Record<string, unknown>;
 };
 
 export class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
-    super("button", props);
-  }
-
-  protected init() {
-    this.element!.classList.add(css.button);
-    if (this.props?.formId) {
-      this.element!.setAttribute("form", this.props.formId);
-    }
+    super(props);
   }
 
   render() {
-    return this.compile("{{text}}", this.props);
+    return this.compile(
+      `
+    <button class="${css.button} {{className}}" {{#if formId}} form="{{formId}}" {{/if}}>{{text}}</button>
+    `,
+      this.props,
+    );
   }
 }

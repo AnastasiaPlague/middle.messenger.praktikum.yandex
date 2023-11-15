@@ -1,22 +1,36 @@
 import { Block } from "utils";
+import { withRouter } from "hocs/withRouter";
+
+import css from "./link.module.scss";
 
 type LinkProps = Partial<HTMLLinkElement> & {
   text: string;
 };
 
-export class Link extends Block {
+export class BaseLink extends Block {
   constructor(props: LinkProps) {
-    super("a", props);
+    super({
+      ...props,
+      events: {
+        click: (event: Event) => {
+          event.preventDefault();
+          this.navigate();
+        },
+      },
+    });
   }
-
-  protected init() {
-    if (this.props.className) {
-      this.element!.classList.add(this.props.className);
-    }
-    this.element!.setAttribute("href", this.props.href);
+  navigate() {
+    this.props.router.go(this.props.href);
   }
 
   render() {
-    return this.compile(`{{text}}`, this.props);
+    return this.compile(
+      `
+    <a class="${css.link} {{className}}">{{text}}</a>
+    `,
+      this.props,
+    );
   }
 }
+
+export const Link = withRouter(BaseLink);

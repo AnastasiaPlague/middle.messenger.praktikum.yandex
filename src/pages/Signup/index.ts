@@ -1,19 +1,21 @@
 import { Block } from "utils";
 import { Button, Form, Link } from "components";
 import css from "./signup.module.scss";
+import AuthController from "controllers/AuthController";
+import { SignUpData } from "api/AuthApi";
+import { Routes } from "const";
 
 export class Signup extends Block {
   constructor() {
-    super("div", {});
+    super({});
   }
 
   protected init() {
-    this.element!.classList.add("fullscreen-centered", css.signup);
-
     this.children = {
       form: new Form({
         className: css.signupForm,
         id: "signup",
+        submitData: (data: SignUpData) => AuthController.signup(data),
         fields: [
           {
             label: "Почта",
@@ -72,7 +74,7 @@ export class Signup extends Block {
       signupButton: new Button({ text: "Создать аккаунт", formId: "signup" }),
       linkSignin: new Link({
         text: "Войти",
-        href: "/",
+        href: Routes.Index,
         className: css.signupLink,
       }),
     };
@@ -81,14 +83,16 @@ export class Signup extends Block {
   render() {
     return this.compile(
       `
-      <div class="${css.signupContainer} container">
-        <div class="card">
-        <h1 class="${css.signupTitle}">Регистрация</h1>
-        {{{form}}}
-        <div class="${css.signupControls}">
-          {{{signupButton}}}
-          {{{linkSignin}}}
-        </div>
+      <div class="${css.signup} fullscreen-centered">
+        <div class="${css.signupContainer} container">
+          <div class="card">
+          <h1 class="${css.signupTitle}">Регистрация</h1>
+          {{{form}}}
+          <div class="${css.signupControls}">
+            {{{signupButton}}}
+            {{{linkSignin}}}
+          </div>
+          </div>
         </div>
       </div>
     `,

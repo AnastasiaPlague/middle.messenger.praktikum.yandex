@@ -48,10 +48,12 @@
       @extend %field;
     }
 
-    &Danger {
-      @extend %field;
+    &Logout {
+      padding-block-start: var(--size-5);
+    }
 
-      color: var(--red-0);
+    &Danger {
+      background-color: var(--red-0);
     }
   }
 }
