@@ -27,14 +27,13 @@
     justify-content: center;
     aspect-ratio: 1/1;
     flex-shrink: 0;
-
     padding: var(--size-2) var(--size-4);
     background-color: transparent;
     margin-inline-start: auto;
     color: var(--stone-4);
     border-radius: 50%;
 
-    & svg {
+    svg {
       pointer-events: none;
     }
 
@@ -46,7 +45,6 @@
   &ActionsPopup {
     display: none;
     position: absolute;
-
     flex-flow: column nowrap;
     gap: var(--size-4);
     right: 0;
@@ -77,9 +75,6 @@
 @media (prefers-color-scheme: light) {
   .chatNav {
     border-color: var(--stone-4);
-  }
-
-  .chatNav {
     &ActionsButton {
       color: var(--stone-5);
     }

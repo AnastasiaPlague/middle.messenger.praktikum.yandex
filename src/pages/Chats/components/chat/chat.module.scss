@@ -97,9 +97,6 @@
 @media (prefers-color-scheme: light) {
   .form {
     border-color: var(--stone-4);
-  }
-
-  .form {
     &SendButton {
       background-color: var(--purple-5);
     }

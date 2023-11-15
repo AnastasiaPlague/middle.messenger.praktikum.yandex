@@ -111,7 +111,10 @@ class Router {
   }
 
   private getRoute(pathname: string) {
-    return this.routes.find((route) => route.match(pathname));
+    return (
+      this.routes.find((route) => route.match(pathname)) ??
+      this.routes.find((route) => route.match(Routes.Error404))
+    );
   }
 }
 
