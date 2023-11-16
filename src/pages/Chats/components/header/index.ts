@@ -1,6 +1,7 @@
 import { Block } from "utils";
 import { State, withStore } from "utils/Store";
 import ChatsController from "controllers/ChatsController";
+import { RESOURCES_URL } from "const";
 
 import css from "./header.module.scss";
 
@@ -52,7 +53,7 @@ class BaseHeader extends Block {
       `
       {{#with chat}} 
        <header class=${css.chatNav}>
-          <img class=${css.chatNavAvatar} {{#if avatar}} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" {{/if}}  width="37" height="37" alt='Аватар'>
+          <img class=${css.chatNavAvatar} {{#if avatar}} src="${RESOURCES_URL}/{{avatar}}" {{/if}}  width="37" height="37" alt='Аватар'>
           <p class=${css.chatNavUsername}>{{title}}</p>
           <button id="chat-controls" class=${css.chatNavActionsButton} aria-label="Управление чатом">
             <svg xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" width="3" height="16" viewBox="0 0 3 16" fill="none">

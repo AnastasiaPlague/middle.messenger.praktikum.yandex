@@ -18,7 +18,6 @@ export class MessagesApi {
   }
 
   public close() {
-    console.log("i should close");
     if (this.socket) {
       this.socket.close();
       this.socket = null;

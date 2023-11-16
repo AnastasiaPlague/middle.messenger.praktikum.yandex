@@ -5,7 +5,7 @@ import { UserPassword } from "api/UserApi";
 
 import css from "./changePassword.module.scss";
 import { State, withStore } from "utils/Store";
-import { Routes } from "const";
+import { RESOURCES_URL, Routes } from "const";
 
 export class BaseChangePassword extends Block {
   init() {
@@ -58,7 +58,7 @@ export class BaseChangePassword extends Block {
         <div class=${css.changePasswordContainer}>
           {{#with user}}
             <div class=${css.changePasswordAvatar}>
-              <img class=${css.changePasswordAvatarImg} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+              <img class=${css.changePasswordAvatarImg} src="${RESOURCES_URL}/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
             </div>  
           {{/with}}
             {{{form}}}
