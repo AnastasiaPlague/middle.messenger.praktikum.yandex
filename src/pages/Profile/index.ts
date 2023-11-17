@@ -1,11 +1,10 @@
 import { Block } from "utils";
 import { State, withStore } from "utils/Store";
 import AuthController from "controllers/AuthController";
-
 import { Button, Link } from "components";
+import { RESOURCES_URL, Routes } from "const";
 
 import css from "./profile.module.scss";
-import { Routes } from "const";
 
 export class BaseProfile extends Block {
   init() {
@@ -42,7 +41,7 @@ export class BaseProfile extends Block {
         <div class=${css.profileContainer}>
           {{#with user}}
             <div class=${css.profileAvatar}>
-              <img class=${css.profileAvatarImg} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+              <img class=${css.profileAvatarImg} src="${RESOURCES_URL}/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
             </div>
             <p class=${css.profileName}>{{display_name}}</p>
             <div class=${css.profileFields}>

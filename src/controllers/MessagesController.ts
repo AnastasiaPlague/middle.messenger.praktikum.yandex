@@ -63,16 +63,20 @@ export class MessagesController {
   }
 
   onMessage(message: MessageEvent, chatId: number) {
-    const received = JSON.parse(message?.data);
-    const previousMessages = store.getState().messages;
+    try {
+      const received = JSON.parse(message?.data);
+      const previousMessages = store.getState().messages;
 
-    if (received.type === "message") {
-      store.set(`messages.${chatId}`, [
-        ...(previousMessages[chatId] || []),
-        received,
-      ]);
-    } else if (Array.isArray(received)) {
-      store.set(`messages.${chatId}`, [...received.reverse()]);
+      if (received.type === "message") {
+        store.set(`messages.${chatId}`, [
+          ...(previousMessages[chatId] || []),
+          received,
+        ]);
+      } else if (Array.isArray(received)) {
+        store.set(`messages.${chatId}`, [...received.reverse()]);
+      }
+    } catch (e) {
+      console.log(e);
     }
   }
 

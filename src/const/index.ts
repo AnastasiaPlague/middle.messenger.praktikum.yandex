@@ -44,3 +44,5 @@ export enum Routes {
   Error404 = "/404",
   Error500 = "/500",
 }
+
+export const RESOURCES_URL = "https://ya-praktikum.tech/api/v2/resources";

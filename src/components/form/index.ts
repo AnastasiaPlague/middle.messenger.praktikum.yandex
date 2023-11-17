@@ -42,7 +42,6 @@ export class Form extends Block {
 
         const errorMessage = validate(name, value);
         validated.push(Boolean(errorMessage));
-
         currentField?.setProps({
           errorMessage,
           value,

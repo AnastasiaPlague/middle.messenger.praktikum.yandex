@@ -95,8 +95,14 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .chatsContainer {
-    border-color: var(--stone-4);
+  .chats {
+    &Container {
+      border-color: var(--stone-4);
+    }
+
+    &Nav {
+      background-color: var(--stone-0);
+    }
   }
 
   .searchInput {

@@ -1,6 +1,7 @@
 import { Block } from "utils";
 import { State, withStore } from "utils/Store";
 import UserController from "controllers/UserController";
+import { RESOURCES_URL } from "const";
 
 import css from "./avatar.module.scss";
 
@@ -41,7 +42,7 @@ export class BaseAvatar extends Block {
       `
       {{#with user}}
         <form class=${css.profileAvatar}>
-          <img class=${css.profileAvatarImg} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+          <img class=${css.profileAvatarImg} src="${RESOURCES_URL}/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
           <label for="avatar" class=${css.profileAvatarLabel}>
             <p class=${css.profileAvatarLabelText}>Поменять аватар</p>
           </label>

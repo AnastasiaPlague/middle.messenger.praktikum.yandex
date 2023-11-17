@@ -60,7 +60,7 @@ export class HTTPTransport {
     this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  public get: HTTPMethod = (url, options: OptionsWithoutMethod = {}) => {
+  public get: HTTPMethod = (url, options = {}) => {
     const queryParams = queryStringify(options.data);
 
     return this.request(url, {
@@ -70,21 +70,21 @@ export class HTTPTransport {
     });
   };
 
-  public put: HTTPMethod = (url, options: OptionsWithoutMethod = {}) => {
+  public put: HTTPMethod = (url, options = {}) => {
     return this.request(url, {
       ...options,
       method: METHOD.PUT,
     });
   };
 
-  public post: HTTPMethod = (url, options: OptionsWithoutMethod = {}) => {
+  public post: HTTPMethod = (url, options = {}) => {
     return this.request(url, {
       ...options,
       method: METHOD.POST,
     });
   };
 
-  public delete: HTTPMethod = (url, options: OptionsWithoutMethod = {}) => {
+  public delete: HTTPMethod = (url, options = {}) => {
     return this.request(url, {
       ...options,
       method: METHOD.DELETE,

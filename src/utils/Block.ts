@@ -138,7 +138,11 @@ export class Block<P extends Record<string, any> = any> {
     const newElement = fragment.firstElementChild as HTMLElement;
 
     if (this._element && newElement) {
-      this._element.replaceWith(newElement);
+      try {
+        this._element.replaceWith(newElement);
+      } catch (e) {
+        console.log("Couldn't replace element");
+      }
     }
 
     this._element = newElement;

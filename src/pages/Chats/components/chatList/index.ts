@@ -1,5 +1,6 @@
 import { Block } from "utils";
 import store, { State, withStore } from "utils/Store";
+import { RESOURCES_URL } from "const";
 
 import css from "./chatList.module.scss";
 
@@ -25,7 +26,7 @@ class BaseChatList extends Block {
         {{#each chats}}
           <li class="${css.chatListItem} {{#compare id ${this.props.activeChat} operator="==="}}${css.chatListItemActive}{{/compare}}" data-chat-id={{id}}> 
             <div class=${css.chatItem}>
-              <img {{#if avatar}} src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" {{/if}} alt="Аватар чата {{title}}" width="47" height="47" class=${css.chatItemAvatar}>
+              <img {{#if avatar}} src="${RESOURCES_URL}/{{avatar}}" {{/if}} alt="Аватар чата {{title}}" width="47" height="47" class=${css.chatItemAvatar}>
               <div class=${css.chatItemContent}>
                 <div class=${css.chatInfo}>
                   <div class=${css.chatInfoName}>{{title}}</div>
