@@ -13,6 +13,7 @@
     flex-flow: column nowrap;
     height: 100%;
     margin-inline: var(--size-4);
+    overflow: hidden;
   }
 
   &Input {
@@ -20,34 +21,41 @@
   }
 }
 
-.chatNav {
-  display: flex;
-  align-items: center;
-  flex-flow: row nowrap;
-  gap: var(--size-3);
-  padding: var(--size-4) var(--size-2);
-  border-bottom: 2px solid var(--stone-7);
-
-  &Avatar {
-    overflow: hidden;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    background-color: var(--stone-7);
-    flex-shrink: 0;
+.messages {
+  &Container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    gap: var(--size-4);
+    height: 100%;
+    padding-block: var(--size-4);
+    overflow-y: auto;
   }
 
-  &Username {
-    font-weight: 500;
-    margin: 0;
+  &Content {
+    position: relative;
+    max-width: 60%;
+    border-radius: 8px;
+    border-start-start-radius: 0;
+    background-color: var(--purple-2);
+    padding: var(--size-1) var(--size-8) var(--size-1) var(--size-2);
+    color: var(--stone-10);
   }
 
-  &ActionsButton {
-    @extend %button;
+  &Time {
+    position: absolute;
+    bottom: var(--size-1);
+    right: 6px;
+    font-size: 11px;
+    font-family: monospace;
+    color: var(--purple-6);
+  }
 
-    padding: var(--size-2) var(--size-4);
-    background-color: transparent;
-    margin-inline-start: auto;
-    color: var(--stone-4);
+  &Yours {
+    border-radius: 8px;
+    border-bottom-right-radius: 0;
+    align-self: flex-end;
+    background-color: var(--purple-0);
   }
 }
 
@@ -87,12 +95,9 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .form,
-  .chatNav {
-    border-color: var(--stone-4);
-  }
-
   .form {
+    border-color: var(--stone-4);
+
     &SendButton {
       background-color: var(--purple-5);
     }
@@ -101,12 +106,6 @@
       fill: var(--stone-0);
     }
 
-    &ActionsButton {
-      color: var(--stone-5);
-    }
-  }
-
-  .chatNav {
     &ActionsButton {
       color: var(--stone-5);
     }

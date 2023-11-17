@@ -4,3 +4,7 @@ export type InputProps = Partial<HTMLInputElement> & {
 };
 
 export type ValidatorType = (arg: string[]) => boolean;
+
+export type Indexed<T = any> = {
+  [key in string]: T;
+};

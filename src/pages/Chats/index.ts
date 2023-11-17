@@ -1,66 +1,112 @@
 import { Block } from "utils";
-import { CHAT_MOCK_DATA } from "const";
+import { Button, Link } from "components";
+import ChatsController from "controllers/ChatsController";
+import { State, withStore } from "utils/Store";
 
+import {
+  Chat,
+  ChatsList,
+  NewChatForm,
+  AddUserForm,
+  RemoveUserForm,
+} from "./components";
 import css from "./chats.module.scss";
-import { Chat } from "./components";
+import { Routes } from "const";
 
-export class Chats extends Block {
-  constructor() {
-    super("div", { data: CHAT_MOCK_DATA });
+export class BaseChats extends Block {
+  init() {
+    this.children = {
+      chat: new Chat({}),
+      chatsList: new ChatsList({}),
+      profileLink: new Link({
+        text: "Профиль >",
+        href: Routes.Profile,
+        className: css.profileLink,
+      }),
+      button: new Button({
+        text: "Добавить чат",
+        className: css.chatsAddButton,
+        events: {
+          click: () => this.handleOpenPopup("#new-chat-popup"),
+        },
+      }),
+      newChatForm: new NewChatForm({
+        closePopup: () => this.handleClosePopup("#new-chat-popup"),
+      }),
+      addUserForm: new AddUserForm({
+        closePopup: () => this.handleClosePopup("#add-user-popup"),
+      }),
+      removeUserForm: new RemoveUserForm({
+        closePopup: () => this.handleClosePopup("#remove-user-popup"),
+      }),
+    };
   }
 
-  init() {
-    this.element!.classList.add(css.chats);
+  componentDidMount(): void {
+    this.getChats();
+  }
 
-    this.children = {
-      chat: new Chat(),
-    };
+  getChats() {
+    ChatsController.getChats();
+  }
+
+  handleOpenPopup(selector: string): void {
+    const popup = document.querySelector(selector);
+    popup?.classList.add("popupShow");
+
+    popup?.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        this.handleClosePopup(selector);
+      }
+    });
+  }
+
+  handleClosePopup(selector: string): void {
+    const popup = document.querySelector(selector);
+    popup?.classList.remove("popupShow");
   }
 
   render() {
     return this.compile(
       `
-      <div class=${css.chatsContainer}>
-        <div class=${css.chatsInnerContainer}>
-          <nav class=${css.chatsNav}>
-            <a class=${css.profileLink} href="/profile">Профиль <svg xmlns="http://www.w3.org/2000/svg" class=${css.profileIcon} height="1em" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></a>
-            <form class=${css.search}>
-              <input class=${css.searchInput} name="search" type="search" placeholder="Поиск"/>
-              <div class=${css.searchIconContainer}>
-                <svg class=${css.searchIcon} viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-              </div>
-            </form>
-          </nav>
-          <ul class=${css.chatList}>
-            {{#each data}}
-              <li class=${css.chatListItem}> 
-              {{#user}}
-                <div class=${css.chatItem}>
-                  <img src="{{avatar}}" alt="Аватар пользователя {{name}}" width="47" height="47" class=${css.chatItemAvatar}>
-                  <div class=${css.chatItemContent}>
-                    <div class=${css.chatInfo}>
-                      <div class=${css.chatInfoName}>{{name}}</div>
-              {{/user}}
-              {{#message}}
-                      <div class=${css.chatInfoTime}>{{timestamp}}</div>
-                    </div>
-                    <div class=${css.chatInfo}>
-                      <div class=${css.chatInfoRecentMessage}>{{content}}</div>
-              {{/message}}
-                      {{#if unreadMessages}}
-                        <span class=${css.chatInfoUnreadMessage}>{{unreadMessages}}</span>
-                      {{/if}}
-                      </div>
-                  </div>
+      <div class=${css.chats}>
+        <div class=${css.chatsContainer}>
+          <div class=${css.chatsInnerContainer}>
+            <nav class=${css.chatsNav}>
+             {{{profileLink}}}
+              <form class=${css.search}>
+                <input class=${css.searchInput} name="search" type="search" placeholder="Поиск"/>
+                <div class=${css.searchIconContainer}>
+                  <svg class=${css.searchIcon} viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
                 </div>
-              </li>
-            {{/each}}
-          </ul>
+              </form>
+            </nav>
+            {{{chatsList}}} 
+          </div>
+          {{{button}}}
         </div>
+          {{#if activeChat}} 
+            {{{chat}}}
+          {{else}}
+            <p class=${css.emptyChat}>Выберите или создайте чат</p>
+          {{/if}}
+       <div id="new-chat-popup" class="${css.chatsPopup}">
+        {{{newChatForm}}}
+       </div>
+       <div id="add-user-popup" class="${css.chatsPopup}">
+        {{{addUserForm}}}
+       </div>
+        <div id="remove-user-popup" class="${css.chatsPopup}">
+        {{{removeUserForm}}}
+       </div>
       </div>
-       {{{chat}}}
     `,
       this.props,
     );
   }
 }
+
+function mapStateToProps(state: State) {
+  return { chats: state.chats, activeChat: state.activeChat ?? null };
+}
+export const Chats = withStore(mapStateToProps)(BaseChats);

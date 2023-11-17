@@ -17,7 +17,6 @@ export class Block<P extends Record<string, any> = any> {
   public children: Record<string, Block | Block[]>;
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
-  private _meta: { tagName: string; props: P };
 
   /** JSDoc
    * @param {string} tagName
@@ -25,15 +24,10 @@ export class Block<P extends Record<string, any> = any> {
    *
    * @returns {void}
    */
-  constructor(tagName = "div", propsWithChildren: P) {
+  constructor(propsWithChildren: P) {
     const eventBus = new EventBus();
 
     const { props, children } = this._getChildrenAndProps(propsWithChildren);
-
-    this._meta = {
-      tagName,
-      props: props as P,
-    };
 
     this.children = children;
     this.props = this._makePropsProxy(props);
@@ -90,14 +84,7 @@ export class Block<P extends Record<string, any> = any> {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
-  }
-
   private _init() {
-    this._createResources();
-
     this.init();
 
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
@@ -148,11 +135,17 @@ export class Block<P extends Record<string, any> = any> {
   private _render() {
     const fragment = this.render();
 
-    this._element!.innerHTML = "";
+    const newElement = fragment.firstElementChild as HTMLElement;
 
-    this._element!.append(fragment);
+    if (this._element && newElement) {
+      try {
+        this._element.replaceWith(newElement);
+      } catch (e) {
+        console.log("Couldn't replace element");
+      }
+    }
 
-    this._removeEvents();
+    this._element = newElement;
 
     this._addEvents();
   }
@@ -231,10 +224,6 @@ export class Block<P extends Record<string, any> = any> {
         throw new Error("Нет прав");
       },
     });
-  }
-
-  _createDocumentElement(tagName: string) {
-    return document.createElement(tagName);
   }
 
   show() {

@@ -1,20 +1,18 @@
 import { Block } from "utils";
 import { Button, Form, Link } from "components";
-import { USER_MOCK_DATA } from "const";
+import UserController from "controllers/UserController";
+import { UserPassword } from "api/UserApi";
 
 import css from "./changePassword.module.scss";
+import { State, withStore } from "utils/Store";
+import { RESOURCES_URL, Routes } from "const";
 
-export class ChangePassword extends Block {
-  constructor() {
-    super("div", { userData: USER_MOCK_DATA });
-  }
-
+export class BaseChangePassword extends Block {
   init() {
-    this.element!.classList.add("container", css.container);
-
     this.children = {
       form: new Form({
         className: css.changePasswordForm,
+        submitData: (data: UserPassword) => UserController.updatePassword(data),
         id: "change_password",
         fields: [
           {
@@ -48,7 +46,7 @@ export class ChangePassword extends Block {
       }),
       linkProfile: new Link({
         text: "Назад",
-        href: "/profile",
+        href: Routes.Profile,
       }),
     };
   }
@@ -56,16 +54,18 @@ export class ChangePassword extends Block {
   render() {
     return this.compile(
       `
-      <div class=${css.changePasswordContainer}>
-        {{#with userData}}
-          <div class=${css.changePasswordAvatar}>
-            <img class=${css.changePasswordAvatarImg} src="{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
-          </div>  
-        {{/with}}
-          {{{form}}}
-          <div class=${css.changePasswordControls}>
-            {{{buttonSave}}}
-            {{{linkProfile}}}
+      <div class="${css.container} container">
+        <div class=${css.changePasswordContainer}>
+          {{#with user}}
+            <div class=${css.changePasswordAvatar}>
+              <img class=${css.changePasswordAvatarImg} src="${RESOURCES_URL}/{{avatar}}" alt="Аватар пользователя {{first_name}}" width="150" height="150" />
+            </div>  
+          {{/with}}
+            {{{form}}}
+            <div class=${css.changePasswordControls}>
+              {{{buttonSave}}}
+              {{{linkProfile}}}
+            </div>
           </div>
         </div>
       </div>
@@ -74,3 +74,9 @@ export class ChangePassword extends Block {
     );
   }
 }
+
+function mapStateToProps(state: State) {
+  return { user: state.user };
+}
+
+export const ChangePassword = withStore(mapStateToProps)(BaseChangePassword);

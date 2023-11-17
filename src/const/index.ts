@@ -1,52 +1,5 @@
 import { ValidatorType } from "types";
 
-export const USER_MOCK_DATA = {
-  avatar: "/kesha.jpg",
-  email: "toad@mushroom.com",
-  login: "coolesttoad",
-  first_name: "Иннокентий",
-  second_name: "Константинопольский",
-  display_name: "Кеша",
-  phone: "+79067991209",
-};
-
-export const CHAT_MOCK_DATA = [
-  {
-    user: {
-      name: "Michael Scott",
-      avatar: "/michael_scott.jpg",
-    },
-    message: {
-      content: "I am running away from my responsibilities and it feels good.",
-      timestamp: "12:01",
-    },
-    unreadMessages: 100,
-  },
-  {
-    user: {
-      name: "Dwight Shrute",
-      avatar: "/dwight_shrute.jpg",
-    },
-    message: {
-      content:
-        "Whenever I'm about to do something, I think, 'Would an idiot do that?' and if they would, I do not do that thing.",
-      timestamp: "18:23",
-    },
-    unreadMessages: 0,
-  },
-  {
-    user: {
-      name: "Stanley Hudson",
-      avatar: "/stanley_hudson.jpg",
-    },
-    message: {
-      content: "If I don't have some cake soon, I might die.",
-      timestamp: "20 апреля 2000",
-    },
-    unreadMessages: 1,
-  },
-];
-
 export const emailRegExp =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -66,6 +19,7 @@ export const VALIDATORS: { [key: string]: ValidatorType } = {
   password: ([value]) => passwordRegexp.test(value),
   newPassword: ([value]) => passwordRegexp.test(value),
   message: ([value]) => !!value,
+  title: ([value]) => !!value,
 };
 
 export const VALIDATOR_ERRORS: Record<string, string> = {
@@ -77,4 +31,18 @@ export const VALIDATOR_ERRORS: Record<string, string> = {
   password: "Должен содержать заглавную букву или цифру, от 8 до 40 символов",
   newPassword:
     "Должен содержать заглавную букву или цифру, от 8 до 40 символов",
+  title: "Введите название",
 };
+
+export enum Routes {
+  Index = "/",
+  Register = "/sign-up",
+  Chats = "/messenger",
+  Profile = "/settings",
+  ChangeProfile = "/change-profile",
+  ChangePassword = "/change-password",
+  Error404 = "/404",
+  Error500 = "/500",
+}
+
+export const RESOURCES_URL = "https://ya-praktikum.tech/api/v2/resources";

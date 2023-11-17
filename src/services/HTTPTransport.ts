@@ -14,9 +14,15 @@ type Options = {
   retries?: number;
 };
 
-type HTTPMethod = (url: string, options?: Options) => Promise<XMLHttpRequest>;
+type OptionsWithoutMethod = Omit<Options, "method">;
+
+type HTTPMethod = <T = XMLHttpRequest>(
+  url: string,
+  options?: OptionsWithoutMethod,
+) => Promise<T>;
 
 export function fetchWithRetry(
+  basePath: string,
   url: string,
   options: Options = { method: METHOD.GET },
 ): Promise<XMLHttpRequest> {
@@ -28,10 +34,10 @@ export function fetchWithRetry(
       throw err;
     }
 
-    return fetchWithRetry(url, { ...options, retries: triesLeft });
+    return fetchWithRetry(basePath, url, { ...options, retries: triesLeft });
   }
 
-  return new HTTPTransport().request(url, options).catch(onError);
+  return new HTTPTransport(basePath).request(url, options).catch(onError);
 }
 
 function queryStringify(data: any): string | null {
@@ -46,8 +52,15 @@ function queryStringify(data: any): string | null {
   return "?" + arr.join("&");
 }
 
-class HTTPTransport {
-  get: HTTPMethod = (url, options = { method: METHOD.GET }) => {
+export class HTTPTransport {
+  static API_URL = "https://ya-praktikum.tech/api/v2";
+  protected endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
+  }
+
+  public get: HTTPMethod = (url, options = {}) => {
     const queryParams = queryStringify(options.data);
 
     return this.request(url, {
@@ -56,27 +69,37 @@ class HTTPTransport {
       method: METHOD.GET,
     });
   };
-  put: HTTPMethod = (url, options = { method: METHOD.PUT }) => {
-    return this.request(url, options);
+
+  public put: HTTPMethod = (url, options = {}) => {
+    return this.request(url, {
+      ...options,
+      method: METHOD.PUT,
+    });
   };
 
-  post: HTTPMethod = (url, options = { method: METHOD.POST }) => {
-    return this.request(url, options);
+  public post: HTTPMethod = (url, options = {}) => {
+    return this.request(url, {
+      ...options,
+      method: METHOD.POST,
+    });
   };
 
-  delete: HTTPMethod = (url, options = { method: METHOD.DELETE }) => {
-    return this.request(url, options);
+  public delete: HTTPMethod = (url, options = {}) => {
+    return this.request(url, {
+      ...options,
+      method: METHOD.DELETE,
+    });
   };
 
-  request: HTTPMethod = (
-    url,
-    options = { method: METHOD.GET, timeout: 5000 },
-  ) => {
+  request<Response = XMLHttpRequest>(
+    url: string,
+    options: Options = { method: METHOD.GET, timeout: 5000 },
+  ): Promise<Response> {
     return new Promise((resolve, reject) => {
       const { method, data, headers, timeout } = options;
       const xhr = new XMLHttpRequest();
 
-      xhr.open(method, url + (data ?? ""));
+      xhr.open(method, this.endpoint + url);
 
       if (headers) {
         for (const [header, value] of Object.entries(headers)) {
@@ -84,8 +107,20 @@ class HTTPTransport {
         }
       }
 
+      xhr.withCredentials = true;
+      xhr.responseType = "json";
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
+        }
+      };
       xhr.onload = function () {
-        resolve(xhr);
+        resolve(xhr.response);
       };
 
       if (timeout) {
@@ -98,9 +133,12 @@ class HTTPTransport {
 
       if (method === METHOD.GET || !data) {
         xhr.send();
-      } else {
+      } else if (data instanceof FormData) {
         xhr.send(data);
+      } else {
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(data));
       }
     });
-  };
+  }
 }

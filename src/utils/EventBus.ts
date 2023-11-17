@@ -24,21 +24,13 @@ export class EventBus<
     event: Event,
     callback: Handler<Args[Event]>,
   ) {
-    if (!this.listeners[event]) {
-      throw new Error(`Нет события: ${event}`);
-    }
-
-    this.listeners[event] = this.listeners[event]!.filter(
+    this.listeners[event] = this.listeners[event]?.filter(
       (listener) => listener !== callback,
     );
   }
 
   emit<Event extends MapInterface<E>>(event: Event, ...args: Args[Event]) {
-    if (!this.listeners[event]) {
-      throw new Event(`Нет события: ${event}`);
-    }
-
-    this.listeners[event]!.forEach((listener) => {
+    this.listeners[event]?.forEach((listener) => {
       listener(...args);
     });
   }
