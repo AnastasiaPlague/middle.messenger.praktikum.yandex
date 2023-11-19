@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { Block } from ".";
 
-describe.only("Block", () => {
+describe("Block", () => {
   class MockBlock extends Block {
     constructor(props: { text?: string }) {
       super(props);

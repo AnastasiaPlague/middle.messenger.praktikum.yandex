@@ -31,10 +31,6 @@ class Store extends EventBus {
   set(path: string, value: unknown) {
     set(this.state, path, value);
 
-    if (import.meta.env.MODE === "development") {
-      console.log(this.state);
-    }
-
     this.emit(StorageEvent.UpdateState, this.state);
   }
 }
