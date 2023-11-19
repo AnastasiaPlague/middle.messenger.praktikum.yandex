@@ -29,6 +29,10 @@ class Route {
     private readonly query: string,
   ) {}
 
+  getPathname() {
+    return this.pathname;
+  }
+
   leave() {
     this.block = null;
   }
@@ -49,8 +53,8 @@ class Route {
 
 class Router {
   private static __instance: Router;
-  private routes: Route[] = [];
-  private currentRoute: Route | null = null;
+  routes: Route[] = [];
+  currentRoute: Route | null = null;
   private history = window.history;
 
   constructor(private readonly rootQuery: string) {
@@ -110,7 +114,7 @@ class Router {
     this.history.forward();
   }
 
-  private getRoute(pathname: string) {
+  getRoute(pathname: string) {
     return (
       this.routes.find((route) => route.match(pathname)) ??
       this.routes.find((route) => route.match(Routes.Error404))
