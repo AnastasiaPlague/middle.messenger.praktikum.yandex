@@ -20,7 +20,7 @@
       { "argsIgnorePattern": "^_" }
     ],
     "no-duplicate-imports": ["error", { "includeExports": true }],
-    "no-console": 1
+    "no-console": 0
   },
   "ignorePatterns": ["node_modules/"]
 }

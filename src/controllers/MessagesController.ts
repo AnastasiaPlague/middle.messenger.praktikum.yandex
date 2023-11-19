@@ -4,7 +4,7 @@ import store from "utils/Store";
 
 export class MessagesController {
   sockets: Record<number, MessagesApi | null> = {};
-  heartbeats: Record<number, number | undefined> = {};
+  heartbeats: Record<number, NodeJS.Timeout | undefined> = {};
 
   public async connect(chatId: number) {
     if (this.sockets[chatId] || !chatId) {
