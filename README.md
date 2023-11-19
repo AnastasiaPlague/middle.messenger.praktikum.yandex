@@ -48,6 +48,14 @@ npm run lint
 npm run lint:styles
 ```
 
+Запуск тестов:
+
+```bash
+npm run test
+```
+
+В проекте настроен pre-commit hook, который запускает линтеры и тесты.
+
 ## Ссылки на страницы:
 
 - [Главная](https://ya-p-messenger.netlify.app/)
