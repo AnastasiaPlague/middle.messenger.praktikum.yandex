@@ -13,7 +13,7 @@ describe("HTTPTransport", () => {
   beforeEach(() => {
     xhr = sinon.useFakeXMLHttpRequest();
 
-    //@ts-expect-error
+    //@ts-expect-error: Intentional for node env
     global.XMLHttpRequest = xhr;
 
     xhr.onCreate = (req) => {

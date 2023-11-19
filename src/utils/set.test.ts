@@ -12,7 +12,7 @@ describe("Utils: set", () => {
     const path = 123;
     const obj = {};
 
-    //@ts-expect-error
+    //@ts-expect-error: Intentional test with wrong type
     const fn = () => set(obj, path, 123);
 
     expect(fn).to.throw(Error);
